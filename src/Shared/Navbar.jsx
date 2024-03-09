@@ -1,29 +1,51 @@
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import useThemeControl from "../Hooks/ThemeControl";
 import logo from "../assets/favicon.png";
+import { FaArrowRightToBracket } from "react-icons/fa6";
 
 const Navbar = () => {
   const [theme, handleToggle] = useThemeControl();
   const fields = (
     <>
       <li>
-        <a>Item 1</a>
+        <NavLink
+          className={({ isActive }) =>
+            isActive ? "text-blue-700 navBtn " : "navBtn "
+          }
+          to={"/"}
+        >
+          Home
+        </NavLink>
       </li>
       <li>
-        <details>
-          <summary>Parent</summary>
-          <ul className="p-2">
-            <li>
-              <a>Submenu 1</a>
-            </li>
-            <li>
-              <a>Submenu 2</a>
-            </li>
-          </ul>
-        </details>
+        <NavLink
+          className={({ isActive }) =>
+            isActive ? "text-blue-700 navBtn " : "navBtn "
+          }
+          to={"/instructors"}
+        >
+          Instructors
+        </NavLink>
       </li>
       <li>
-        <a>Item 3</a>
+        <NavLink
+          className={({ isActive }) =>
+            isActive ? "text-blue-700 navBtn " : "navBtn "
+          }
+          to={"/clsses"}
+        >
+          Classes
+        </NavLink>
+      </li>
+      <li>
+        <NavLink
+          className={({ isActive }) =>
+            isActive ? "text-blue-700 navBtn " : "navBtn "
+          }
+          to={"/dashboard"}
+        >
+          Dashboard
+        </NavLink>
       </li>
     </>
   );
@@ -49,7 +71,7 @@ const Navbar = () => {
           </div>
           <ul
             tabIndex={0}
-            className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52"
+            className="menu menu-sm dropdown-content mt-3 z-[1] p-2 gap-2 shadow bg-base-100 rounded-box w-52"
           >
             {fields}
           </ul>
@@ -65,10 +87,16 @@ const Navbar = () => {
         </Link>
       </div>
       <div className="navbar-center hidden lg:flex">
-        <ul className="menu menu-horizontal px-1">{fields}</ul>
+        <ul className="menu menu-horizontal px-1 gap-3">{fields}</ul>
       </div>
       <div className="navbar-end">
-        <a className="btn">Button</a>
+        <Link
+          to="/login"
+          className="px-5 flex gap-1 items-center py-2 border-teal-400 border mr-2 rounded-lg"
+        >
+          <FaArrowRightToBracket />
+          <span>Login</span>
+        </Link>
       </div>
       <>
         <label className="swap swap-rotate">

@@ -1,3 +1,10 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.NavActive {
+  @apply bg-teal-100 border-teal-400;
+}
+.navBtn {
+  @apply text-xl before:block before:absolute hover:before:bg-teal-500 before:w-0 before:h-0 hover:before:h-20 hover:before:w-40 before:-bottom-2 before:-right-2 before:duration-500 before:rounded-xl before:-z-10 relative inline-block transform hover:text-white  bg-transparent border-[1px] overflow-hidden border-teal-400 duration-500;
+}

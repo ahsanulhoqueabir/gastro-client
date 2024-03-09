@@ -1,7 +1,8 @@
+import React from "react";
+import Navbar from "../Shared/Navbar";
 import { Outlet } from "react-router-dom";
-import Navbar from "./Shared/Navbar";
 
-const App = () => {
+const Basic = () => {
   return (
     <div>
       <Navbar />
@@ -9,4 +10,5 @@ const App = () => {
     </div>
   );
 };
-export default App;
+
+export default Basic;

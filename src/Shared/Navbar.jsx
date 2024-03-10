@@ -2,9 +2,13 @@ import { Link, NavLink } from "react-router-dom";
 import useThemeControl from "../Hooks/ThemeControl";
 import logo from "../assets/favicon.png";
 import { FaArrowRightToBracket } from "react-icons/fa6";
+import { useContext } from "react";
+import { authContext } from "../ContextProvider/AuthProvider";
+import LoadingNavbar from "./LoadingNavbar";
 
 const Navbar = () => {
   const [theme, handleToggle] = useThemeControl();
+  const { user, authLoading } = useContext(authContext);
   const fields = (
     <>
       <li>
@@ -49,6 +53,9 @@ const Navbar = () => {
       </li>
     </>
   );
+  if (authLoading) {
+    return <LoadingNavbar />;
+  }
   return (
     <div className="navbar bg-base-200 lg:px-20">
       <div className="navbar-start">
@@ -90,13 +97,25 @@ const Navbar = () => {
         <ul className="menu menu-horizontal px-1 gap-3">{fields}</ul>
       </div>
       <div className="navbar-end">
-        <Link
-          to="/login"
-          className="px-5 flex gap-1 items-center py-2 border-teal-400 border mr-2 rounded-lg"
-        >
-          <FaArrowRightToBracket />
-          <span>Login</span>
-        </Link>
+        {user ? (
+          <div
+            tabIndex={0}
+            role="button"
+            className="btn btn-ghost btn-circle avatar"
+          >
+            <div className="w-10 rounded-full">
+              <img alt={user.displayName} src={user.photoURL} />
+            </div>
+          </div>
+        ) : (
+          <Link
+            to="/login"
+            className="px-5 flex gap-1 items-center py-2 border-teal-400 border mr-2 rounded-lg"
+          >
+            <FaArrowRightToBracket />
+            <span>Login</span>
+          </Link>
+        )}
       </div>
       <>
         <label className="swap swap-rotate">

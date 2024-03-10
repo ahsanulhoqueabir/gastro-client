@@ -5,8 +5,10 @@ import { useForm } from "react-hook-form";
 import Button from "../Components/Button";
 import SocialLogin from "../Shared/SocialLogin";
 import { authContext } from "../ContextProvider/AuthProvider";
+import { Link } from "react-router-dom";
+import { toast } from "react-toastify";
 const Login = () => {
-  const { signInWithEmailAndPassword } = useContext(authContext);
+  const { emailPasswordSignIn } = useContext(authContext);
   const {
     register,
     handleSubmit,
@@ -14,7 +16,9 @@ const Login = () => {
     formState: { errors },
   } = useForm();
   const onSubmit = (data) => {
-    signInWithEmailAndPassword(data.email, data.password);
+    emailPasswordSignIn(data.email, data.password)
+      .then((res) => toast("Successfully Log in"))
+      .catch((err) => toast(err.message));
   };
   return (
     <div className="lg:px-28 px-5">
@@ -47,6 +51,12 @@ const Login = () => {
             <Button>Submit</Button>
           </form>
           <SocialLogin />
+          <p>
+            Don't have an account?{" "}
+            <Link to="/signup" className="text-teal-600">
+              Sign up
+            </Link>
+          </p>
         </div>
       </section>
     </div>

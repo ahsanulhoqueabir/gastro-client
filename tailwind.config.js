@@ -8,7 +8,7 @@ export default {
     themes: [
       {
         light: {
-          primary: "#006cff",
+          primary: "#3A5151",
           secondary: "#00a5b7",
           accent: "#0090ff",
           neutral: "#181119",
@@ -19,7 +19,7 @@ export default {
           error: "#ff7b98",
         },
         dark: {
-          primary: "#9000ff",
+          primary: "#74A2A2",
           secondary: "#518c92",
           accent: "#4dcf00",
           neutral: "#141414",

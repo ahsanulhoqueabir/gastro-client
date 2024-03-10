@@ -22,9 +22,6 @@ const Login = () => {
       .then((res) => toast("Successfully Log in"))
       .catch((err) => toast(err.message));
   };
-  const handleView = (e) => {
-    setIsPasswordVisible(!isPasswordVisible);
-  };
   return (
     <div className="lg:px-28 px-5">
       <section className="lg:flex  gap-10 lg:justify-center lg:items-center divide-x-4 divide-teal-600 ">
@@ -54,9 +51,15 @@ const Login = () => {
               />
               <div className="absolute top-9 right-3">
                 {isPasswordVisible ? (
-                  <FaEyeSlash className="text-black" onClick={handleView} />
+                  <FaEyeSlash
+                    className="text-black"
+                    onClick={() => setIsPasswordVisible(!isPasswordVisible)}
+                  />
                 ) : (
-                  <FaRegEye className="text-green-700" onClick={handleView} />
+                  <FaRegEye
+                    className="text-green-700"
+                    onClick={() => setIsPasswordVisible(!isPasswordVisible)}
+                  />
                 )}
               </div>
             </div>

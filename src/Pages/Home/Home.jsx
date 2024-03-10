@@ -1,10 +1,13 @@
 import RouteTitle from "../../utilities/RouteTitle";
+import PopularClass from "./Component/PopularClass";
+import Slider from "./Component/Slider";
 
 const Home = () => {
   RouteTitle("Home");
   return (
     <div>
-      <h1>Home</h1>
+      <Slider />
+      <PopularClass />
     </div>
   );
 };

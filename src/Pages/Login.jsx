@@ -1,5 +1,6 @@
 import Lottie from "lottie-react";
-import React, { useContext } from "react";
+import React, { useContext, useRef, useState } from "react";
+import { FaEyeSlash, FaRegEye } from "react-icons/fa";
 import anim from "/src/assets/loginpage.json";
 import { useForm } from "react-hook-form";
 import Button from "../Components/Button";
@@ -8,6 +9,7 @@ import { authContext } from "../ContextProvider/AuthProvider";
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 const Login = () => {
+  const [isPasswordVisible, setIsPasswordVisible] = useState(false);
   const { emailPasswordSignIn } = useContext(authContext);
   const {
     register,
@@ -19,6 +21,9 @@ const Login = () => {
     emailPasswordSignIn(data.email, data.password)
       .then((res) => toast("Successfully Log in"))
       .catch((err) => toast(err.message));
+  };
+  const handleView = (e) => {
+    setIsPasswordVisible(!isPasswordVisible);
   };
   return (
     <div className="lg:px-28 px-5">
@@ -38,15 +43,22 @@ const Login = () => {
                 {...register("email", { required: true })}
               />
             </div>
-            <div className="space-y-2">
+            <div className="space-y-2 relative">
               <label className=" font-medium">Password*</label>
               <input
-                type="password"
+                type={isPasswordVisible ? "text" : "password"}
                 name="password"
                 className="w-full shadow-md shadow-teal-200 rounded-md placeholder:text-black bg-secondary py-2 px-4 focus:outline-none"
                 placeholder="Enter your password"
                 {...register("password", { required: true })}
               />
+              <div className="absolute top-9 right-3">
+                {isPasswordVisible ? (
+                  <FaEyeSlash className="text-black" onClick={handleView} />
+                ) : (
+                  <FaRegEye className="text-green-700" onClick={handleView} />
+                )}
+              </div>
             </div>
             <Button>Submit</Button>
           </form>

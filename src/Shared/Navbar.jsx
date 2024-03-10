@@ -8,7 +8,7 @@ import LoadingNavbar from "./LoadingNavbar";
 
 const Navbar = () => {
   const [theme, handleToggle] = useThemeControl();
-  const { user, authLoading } = useContext(authContext);
+  const { user, authLoading, logout } = useContext(authContext);
   const fields = (
     <>
       <li>
@@ -98,14 +98,24 @@ const Navbar = () => {
       </div>
       <div className="navbar-end">
         {user ? (
-          <div
-            tabIndex={0}
-            role="button"
-            className="btn btn-ghost btn-circle avatar"
-          >
-            <div className="w-10 rounded-full">
-              <img alt={user.displayName} src={user.photoURL} />
+          <div className="dropdown dropdown-end">
+            <div
+              tabIndex={0}
+              role="button"
+              className="btn btn-ghost btn-circle avatar"
+            >
+              <div className="w-10 rounded-full">
+                <img alt={user.displayName} src={user.photoURL} />
+              </div>
             </div>
+            <ul
+              tabIndex={0}
+              className="mt-3 z-[1] p-2 shadow menu menu-sm dropdown-content bg-base-100 rounded-box w-52"
+            >
+              <li>
+                <p onClick={logout}>Logout</p>
+              </li>
+            </ul>
           </div>
         ) : (
           <Link

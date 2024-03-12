@@ -1,4 +1,4 @@
-import cn from "../utilities/cn";
+import cn from "../../utilities/cn";
 
 const Button = ({ children, className, ...restProps }) => {
   return (

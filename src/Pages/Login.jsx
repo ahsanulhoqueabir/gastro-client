@@ -3,7 +3,7 @@ import React, { useContext, useRef, useState } from "react";
 import { FaEyeSlash, FaRegEye } from "react-icons/fa";
 import anim from "/src/assets/loginpage.json";
 import { useForm } from "react-hook-form";
-import Button from "../Components/Button";
+import Button from "../Components/Button/Button";
 import SocialLogin from "../Shared/SocialLogin";
 import { authContext } from "../ContextProvider/AuthProvider";
 import { Link } from "react-router-dom";

@@ -1,5 +1,3 @@
-import React from "react";
-
 const LoadingNavbar = () => {
   return (
     <div className="flex bg-base-200 py-4  gap-10 w-full justify-between lg:px-20">

@@ -1,7 +1,8 @@
 import React from "react";
 import { useForm } from "react-hook-form";
-import Button from "../../Components/Button";
+import Button from "../../Components/Button/Button";
 import { toast } from "react-toastify";
+import useClasses from "../../Hooks/useClasses";
 
 const AddClass = () => {
   const {
@@ -10,6 +11,7 @@ const AddClass = () => {
     watch,
     formState: { errors },
   } = useForm();
+  const [, , refetch] = useClasses();
 
   const onSubmit = (data) => {
     const classData = {

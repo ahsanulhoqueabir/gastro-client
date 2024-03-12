@@ -2,7 +2,7 @@ import Lottie from "lottie-react";
 import React, { useContext, useRef, useState } from "react";
 import anim from "/src/assets/loginpage.json";
 import { useForm } from "react-hook-form";
-import Button from "../Components/Button";
+import Button from "../Components/Button/Button";
 import SocialLogin from "../Shared/SocialLogin";
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";

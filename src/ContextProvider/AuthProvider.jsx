@@ -18,6 +18,7 @@ const auth = getAuth(app);
 const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [authLoading, setAuthLoading] = useState(true);
+  const [userRole, setRole] = useState("");
 
   const googleProvider = new GoogleAuthProvider();
   const githubProvider = new GithubAuthProvider();
@@ -56,6 +57,11 @@ const AuthProvider = ({ children }) => {
     });
     return unsubscribe;
   }, [user]);
+  useEffect(() => {
+    fetch(`http://localhost:3000/getUserByemail?email=${user?.email}`)
+      .then((res) => res.json())
+      .then((data) => setRole(data.data.role));
+  }, [user]);
 
   const authInfo = {
     googleSignIn,
@@ -66,6 +72,7 @@ const AuthProvider = ({ children }) => {
     authLoading,
     signUpewithemail,
     profileUpdate,
+    userRole,
   };
 
   return (

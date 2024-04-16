@@ -8,7 +8,14 @@ import SocialLogin from "../Shared/SocialLogin";
 import { authContext } from "../ContextProvider/AuthProvider";
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
+import RouteTitle from "../utilities/RouteTitle";
+import { router } from "../Router/Router";
+import { useLocation, useNavigate } from "react-router-dom";
 const Login = () => {
+  RouteTitle("Login");
+  const location = useLocation();
+  const navigate = useNavigate();
+  const { from } = location.state || { from: { pathname: "/" } };
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
   const { emailPasswordSignIn } = useContext(authContext);
   const {
@@ -19,7 +26,10 @@ const Login = () => {
   } = useForm();
   const onSubmit = (data) => {
     emailPasswordSignIn(data.email, data.password)
-      .then((res) => toast("Successfully Log in"))
+      .then((res) => {
+        toast("Successfully Log in");
+        navigate(from, { replace: true });
+      })
       .catch((err) => toast(err.message));
   };
   return (

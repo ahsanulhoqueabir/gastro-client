@@ -7,7 +7,9 @@ import SocialLogin from "../Shared/SocialLogin";
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 import { authContext } from "../ContextProvider/AuthProvider";
+import RouteTitle from "../utilities/RouteTitle";
 const SignUp = () => {
+  RouteTitle("Sign Up");
   const { signUpewithemail, profileUpdate } = useContext(authContext);
   const {
     register,
@@ -49,7 +51,7 @@ const SignUp = () => {
         fetch("http://localhost:3000/users", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(data),
+          body: JSON.stringify(data, (data.role = "user")),
         });
         profileUpdate(data.name, data.photo);
         toast("Your Sign Up is successfull");
@@ -146,7 +148,7 @@ const SignUp = () => {
                 type="phone"
                 className="w-full shadow-md shadow-teal-200 rounded-md placeholder:text-black bg-secondary py-2 px-4 focus:outline-none"
                 placeholder="Enter a valid Phone Number"
-                {...register("phone", { required: false })}
+                {...register("phone", { required: false, minLength: 10 })}
               />
             </div>
             <div className="space-y-2">

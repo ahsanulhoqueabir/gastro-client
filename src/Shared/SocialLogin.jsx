@@ -9,12 +9,13 @@ const SocialLogin = () => {
   const handleGoogleSignIn = () => {
     googleSignIn()
       .then((res) => {
-        console.log(res);
+        // console.log(res);
         toast.success(`Welcome ${res.user.displayName}!`);
         const data = {
           name: res.user.displayName,
           email: res.user.email,
           photo: res.user.photoURL,
+          role: "user",
         };
         fetch("http://localhost:3000/users", {
           method: "POST",

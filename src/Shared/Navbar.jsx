@@ -36,7 +36,7 @@ const Navbar = () => {
           className={({ isActive }) =>
             isActive ? "text-blue-700 navBtn " : "navBtn "
           }
-          to={"/clsses"}
+          to={"/classes"}
         >
           Classes
         </NavLink>

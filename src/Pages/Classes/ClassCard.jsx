@@ -2,8 +2,12 @@ import React, { useContext } from "react";
 import { FaBangladeshiTakaSign } from "react-icons/fa6";
 import Explore from "../../Components/Button/Explore";
 import { authContext } from "../../ContextProvider/AuthProvider";
+import { useLocation, useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
 const ClassCard = ({ item }) => {
-  const { userRole } = useContext(authContext);
+  const { user, userRole } = useContext(authContext);
+  const location = useLocation();
+  const navigate = useNavigate();
 
   const isDisabled = () => {
     if (
@@ -22,13 +26,29 @@ const ClassCard = ({ item }) => {
     }
   };
   const handleEnroll = () => {
-    console.log("Enrolled");
+    if (!user) {
+      Swal.fire({
+        title: "You Need to Login First",
+        text: " Want to login now?",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          navigate("/login", { state: { from: location.pathname } });
+        }
+      });
+    } else {
+      console.log("Clicked");
+    }
   };
 
   return (
     <div
       key={item._id}
-      className={`bg-white p-5 rounded-lg shadow-md ${redBG()}`}
+      className={` p-5 rounded-lg shadow-md shadow-teal-300 ${redBG()}`}
     >
       <img
         src={item.classimage}
@@ -51,9 +71,8 @@ const ClassCard = ({ item }) => {
         </span>
       </p>
       <Explore className="mt-5" onClick={handleEnroll} disabled={isDisabled()}>
-        Enroll Now
+        Select
       </Explore>
-      {/* <button disabled ></button> */}
     </div>
   );
 };

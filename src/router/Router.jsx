@@ -8,6 +8,7 @@ import SignUp from "../Pages/SignUp";
 import Instructors from "../Pages/Instructors/Instructors";
 import AddClass from "../Pages/Admin/AddClass";
 import Classes from "../Pages/Classes/Classes";
+import StdDashboard from "../Pages/Dashboard/Student/StdDashboard";
 
 export const router = createBrowserRouter([
   {
@@ -34,6 +35,16 @@ export const router = createBrowserRouter([
       {
         path: "/signup",
         element: <SignUp />,
+      },
+      {
+        path: "dashboard",
+        element: <StdDashboard />,
+        children: [
+          {
+            path: "home",
+            element: <StdDashboard />,
+          },
+        ],
       },
     ],
   },

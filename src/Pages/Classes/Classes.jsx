@@ -5,8 +5,10 @@ import { FaBangladeshiTakaSign } from "react-icons/fa6";
 import Explore from "../../Components/Button/Explore";
 import { authContext } from "../../ContextProvider/AuthProvider";
 import ClassCard from "./ClassCard";
+import RouteTitle from "../../utilities/RouteTitle";
 
 const Classes = () => {
+  RouteTitle("Classes");
   const [classes, classLoading, refetch] = useClasses();
   const { authLoading } = useContext(authContext);
   const Fclasses = Array.from({ length: 12 }, (_, i) => i + 1);

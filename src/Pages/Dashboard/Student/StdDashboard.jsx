@@ -1,15 +1,13 @@
 import React from "react";
 import DashboardNav from "../../../Shared/DashboardNav";
+import { Outlet } from "react-router-dom";
 
 const StdDashboard = () => {
   return (
-    <div className=" relative  w-screen h-screen">
+    <div className=" relative  min-w-screen min-h-screen">
       <DashboardNav />
       <div>
-        <h1>
-          Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ratione,
-          quod explicabo cum autem nobis dolores odio animi eius earum unde?
-        </h1>
+        <Outlet />
       </div>
     </div>
   );

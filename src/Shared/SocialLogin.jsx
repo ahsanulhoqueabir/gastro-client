@@ -20,8 +20,8 @@ const SocialLogin = () => {
           photo: res.user.photoURL,
           role: "user",
         };
-        fetch("http://localhost:3000/users", {
-          method: "POST",
+        fetch("http://localhost:3000/addUser", {
+          method: "PUT",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(data),
         });

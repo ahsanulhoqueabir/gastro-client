@@ -41,7 +41,34 @@ const ClassCard = ({ item }) => {
         }
       });
     } else {
-      console.log("Clicked");
+      Swal.fire({
+        title: "Are You Sure?",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          const url = `http://localhost:3000/addSelectedClass/${user.email}`;
+          fetch(url, {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(item),
+          })
+            .then((res) => res.json())
+            .then((data) => {
+              if (data) {
+                Swal.fire({
+                  title: "Class Added Successfully",
+                  icon: "success",
+                });
+              }
+            });
+        }
+      });
     }
   };
 

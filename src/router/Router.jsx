@@ -9,6 +9,7 @@ import Instructors from "../Pages/Instructors/Instructors";
 import AddClass from "../Pages/Admin/AddClass";
 import Classes from "../Pages/Classes/Classes";
 import StdDashboard from "../Pages/Dashboard/Student/StdDashboard";
+import SelectedClass from "../Pages/Dashboard/Student/SelectedClass";
 
 export const router = createBrowserRouter([
   {
@@ -41,8 +42,12 @@ export const router = createBrowserRouter([
         element: <StdDashboard />,
         children: [
           {
-            path: "home",
-            element: <StdDashboard />,
+            // path: "",
+            // element: <SelectedClass />,
+          },
+          {
+            path: "selectedClass",
+            element: <SelectedClass />,
           },
         ],
       },

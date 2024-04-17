@@ -1,32 +1,25 @@
 import React from "react";
 import useSelected from "../../../Hooks/useSelected";
 import PageBanner from "../../../Components/PageBanner";
-import { Link } from "react-router-dom";
-import { FaTrashAlt } from "react-icons/fa";
 import Card from "./Component/Card";
 
-const SelectedClass = () => {
+const EnrolledClass = () => {
   const [info, infoLoading, refetch] = useSelected();
-  const l = info.selectedClass.length;
+  const l = info.enrolledClass.length;
 
   return (
     <>
-      <PageBanner>My Selected Class</PageBanner>
+      <PageBanner>My Enrolled Classes</PageBanner>
       <div className="px-5 lg:px-24 py-10">
         {infoLoading ? (
           <div className="flex justify-center items-center">
             <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-gray-900"></div>
           </div>
-        ) : //   <div className="grid grid-cols-1 gap-3 space-y-1 divide-y-2 ">
-        //     {info.selectedClass.map((i) => (
-        //       <Card i={i} key={i._id} />
-        //     ))}
-        //   </div>
-        l > 0 ? (
+        ) : l > 0 ? (
           <div className="flex justify-center">
             <table className="">
               <tbody>
-                {info.selectedClass.map((i) => (
+                {info.enrolledClass.map((i) => (
                   <Card i={i} key={i._id} />
                 ))}
               </tbody>
@@ -34,7 +27,7 @@ const SelectedClass = () => {
           </div>
         ) : (
           <p className="text-center mx-auto">
-            You Have not added any course in cart yet!
+            You Have not enrolled Any course yet!
           </p>
         )}
       </div>
@@ -42,4 +35,4 @@ const SelectedClass = () => {
   );
 };
 
-export default SelectedClass;
+export default EnrolledClass;

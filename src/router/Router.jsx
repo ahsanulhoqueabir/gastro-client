@@ -16,6 +16,8 @@ import LoadingSpinner from "../Shared/LoadingSpinner";
 import MyClass from "../Pages/Dashboard/Instructor/MyClass";
 import ManageClasses from "../Pages/Dashboard/Admin/ManageClasses";
 import ManageUser from "../Pages/Dashboard/Admin/ManageUser/ManageUser";
+import InstructorRoute from "./InstructorRoute";
+import AdminAccess from "./AdminAccess";
 
 export const router = createBrowserRouter([
   {
@@ -51,10 +53,6 @@ export const router = createBrowserRouter([
         path: "dashboard",
         element: <StdDashboard />,
         children: [
-          {
-            // path: "",
-            // element: <SelectedClass />,
-          },
           // student route ----------------
           {
             path: "selectedClass",
@@ -71,22 +69,38 @@ export const router = createBrowserRouter([
           // instructor route ---------------
           {
             path: "addNewClass",
-            element: <AddClass />,
+            element: (
+              <InstructorRoute>
+                <AddClass />
+              </InstructorRoute>
+            ),
           },
           {
             path: "myclass",
-            element: <MyClass />,
+            element: (
+              <InstructorRoute>
+                <MyClass />
+              </InstructorRoute>
+            ),
           },
 
           // admin routes -------------------
           {
             path: "manageclasses",
-            element: <ManageClasses />,
+            element: (
+              <AdminAccess>
+                <ManageClasses />
+              </AdminAccess>
+            ),
           },
           {
-            path: 'manageuser',
-            element: <ManageUser/>
-          }
+            path: "manageuser",
+            element: (
+              <AdminAccess>
+                <ManageUser />
+              </AdminAccess>
+            ),
+          },
         ],
       },
     ],

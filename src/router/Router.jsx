@@ -13,6 +13,7 @@ import SelectedClass from "../Pages/Dashboard/Student/SelectedClass";
 import EnrolledClass from "../Pages/Dashboard/Student/EnrolledClass";
 import Payment from "../Pages/Dashboard/Payment/Payment";
 import LoadingSpinner from "../Shared/LoadingSpinner";
+import MyClass from "../Pages/Dashboard/Instructor/MyClass";
 
 export const router = createBrowserRouter([
   {
@@ -69,6 +70,10 @@ export const router = createBrowserRouter([
           {
             path: "addNewClass",
             element: <AddClass />,
+          },
+          {
+            path: "myclass",
+            element: <MyClass />,
           },
         ],
       },

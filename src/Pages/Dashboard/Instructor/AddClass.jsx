@@ -20,7 +20,9 @@ const AddClass = () => {
   const onSubmit = async (data) => {
     const classData = {
       ...data,
+      approveStatus: "pending",
     };
+    classData.totalSeats = parseInt(classData.availableseats);
     classData.availableseats = parseInt(classData.availableseats);
     classData.price = parseInt(classData.price);
 
@@ -37,7 +39,6 @@ const AddClass = () => {
       })
         .then((res) => res.json())
         .then((data) => {
-          console.log(data);
           if (data.success === true) {
             classData.classimage = data.data.display_url;
           }
@@ -47,7 +48,6 @@ const AddClass = () => {
     axiosSecure.post("/allclasses", classData);
     toast("Added Successfully");
     refetch();
-    console.log(classData);
   };
   return (
     <div>

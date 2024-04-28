@@ -46,6 +46,14 @@ const DashboardNav = () => {
 
         <small className="text-center text-xs font-medium">Add New </small>
       </Link>
+      <Link
+        to="myclass"
+        className="flex aspect-square hover:bg-indigo-100 min-h-[32px] w-16 flex-col items-center justify-center gap-1 rounded-md p-1.5 text-gray-700  "
+      >
+        <FaCheckToSlot />
+
+        <small className="text-center text-xs font-medium"> my Class </small>
+      </Link>
     </nav>
   );
 };

@@ -5,10 +5,11 @@ import { FaArrowRightToBracket } from "react-icons/fa6";
 import { useContext } from "react";
 import { authContext } from "../ContextProvider/AuthProvider";
 import LoadingNavbar from "./LoadingNavbar";
+import useAuth from "../Hooks/useAuth";
 
 const Navbar = () => {
   const [theme, handleToggle] = useThemeControl();
-  const { user, authLoading, logout } = useContext(authContext);
+  const { user, authLoading, logout } = useAuth();
   const fields = (
     <>
       <li>
@@ -41,16 +42,18 @@ const Navbar = () => {
           Classes
         </NavLink>
       </li>
-      <li>
-        <NavLink
-          className={({ isActive }) =>
-            isActive ? "text-blue-700 navBtn " : "navBtn "
-          }
-          to={"/dashboard"}
-        >
-          Dashboard
-        </NavLink>
-      </li>
+      {user && (
+        <li>
+          <NavLink
+            className={({ isActive }) =>
+              isActive ? "text-blue-700 navBtn " : "navBtn "
+            }
+            to={"/dashboard"}
+          >
+            Dashboard
+          </NavLink>
+        </li>
+      )}
     </>
   );
   if (authLoading) {

@@ -1,11 +1,12 @@
 import React from "react";
-import useSelected from "../../../Hooks/useSelected";
+import useSelected from "../../../Hooks/useUserData";
 import PageBanner from "../../../Components/PageBanner";
 import Card from "./Component/Card";
+import CardEn from "./Component/CardEn";
 
 const EnrolledClass = () => {
-  const [info, infoLoading, refetch] = useSelected();
-  const l = info.enrolledClass.length;
+  const [, infoLoading, refetch, , enrolledClass] = useSelected();
+  const l = enrolledClass?.length;
 
   return (
     <>
@@ -19,8 +20,8 @@ const EnrolledClass = () => {
           <div className="flex justify-center">
             <table className="">
               <tbody>
-                {info.enrolledClass.map((i) => (
-                  <Card i={i} key={i._id} />
+                {enrolledClass.map((i) => (
+                  <CardEn i={i} key={i._id} />
                 ))}
               </tbody>
             </table>

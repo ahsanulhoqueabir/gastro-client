@@ -11,6 +11,7 @@ import {
   signOut,
   updateProfile,
 } from "firebase/auth";
+import axios from "axios";
 
 export const authContext = createContext(null);
 const auth = getAuth(app);
@@ -40,6 +41,7 @@ const AuthProvider = ({ children }) => {
   };
 
   const logout = () => {
+    localStorage.removeItem("access-token");
     return signOut(auth);
   };
 
@@ -53,14 +55,22 @@ const AuthProvider = ({ children }) => {
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (authUser) => {
       setUser(authUser);
+      // get and set token
+      if (!user) {
+        localStorage.removeItem("access-token");
+      }
+      if (user) {
+        axios
+          .post("http://localhost:3000/jwt", {
+            email: user?.email,
+          })
+          .then((res) => {
+            localStorage.setItem("access-token", res.data.token);
+          });
+      }
       setAuthLoading(false);
     });
     return unsubscribe;
-  }, [user]);
-  useEffect(() => {
-    fetch(`http://localhost:3000/getUserByemail?email=${user?.email}`)
-      .then((res) => res.json())
-      .then((data) => setRole(data.data.role));
   }, [user]);
 
   const authInfo = {
@@ -72,7 +82,6 @@ const AuthProvider = ({ children }) => {
     authLoading,
     signUpewithemail,
     profileUpdate,
-    userRole,
   };
 
   return (

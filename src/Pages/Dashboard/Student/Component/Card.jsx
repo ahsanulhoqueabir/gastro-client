@@ -3,11 +3,13 @@ import { FaTrashAlt } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { authContext } from "../../../../ContextProvider/AuthProvider";
 import Swal from "sweetalert2";
+import useUserData from "../../../../Hooks/useUserData";
 
 const Card = ({ i }) => {
+  const [, , refetch, ,] = useUserData();
   const { user } = useContext(authContext);
   const handleDelete = () => {
-    console.log(i._id);
+    // console.log(i._id);
     const url = `http://localhost:3000/deleteSelectedClass/${user?.email}/${i._id}`;
     Swal.fire({
       title: "Want to Remove this Class?",
@@ -19,6 +21,7 @@ const Card = ({ i }) => {
     }).then((result) => {
       if (result.isConfirmed) {
         fetch(url, { method: "DELETE" });
+        refetch();
         Swal.fire({
           title: "Removed!",
           text: "The class is removed from your list.",
@@ -48,7 +51,7 @@ const Card = ({ i }) => {
             </button>
           </div>
           <div>
-            <Link>
+            <Link to={`/dashboard/payment/${i._id}`}>
               <button className="px-4 rounded-lg text-white py-0.5 bg-green-400">
                 Pay
               </button>

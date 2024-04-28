@@ -11,6 +11,8 @@ import Classes from "../Pages/Classes/Classes";
 import StdDashboard from "../Pages/Dashboard/Student/StdDashboard";
 import SelectedClass from "../Pages/Dashboard/Student/SelectedClass";
 import EnrolledClass from "../Pages/Dashboard/Student/EnrolledClass";
+import Payment from "../Pages/Dashboard/Payment/Payment";
+import LoadingSpinner from "../Shared/LoadingSpinner";
 
 export const router = createBrowserRouter([
   {
@@ -39,6 +41,10 @@ export const router = createBrowserRouter([
         element: <SignUp />,
       },
       {
+        path: "/spinnertest",
+        element: <LoadingSpinner />,
+      },
+      {
         path: "dashboard",
         element: <StdDashboard />,
         children: [
@@ -53,6 +59,14 @@ export const router = createBrowserRouter([
           {
             path: "Enrolled",
             element: <EnrolledClass />,
+          },
+          // {
+          //   path: "Payment",
+          //   element: <Payment />,
+          // },
+          {
+            path: "Payment/:id",
+            element: <Payment />,
           },
         ],
       },

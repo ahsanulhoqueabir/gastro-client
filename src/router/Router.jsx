@@ -15,6 +15,7 @@ import Payment from "../Pages/Dashboard/Payment/Payment";
 import LoadingSpinner from "../Shared/LoadingSpinner";
 import MyClass from "../Pages/Dashboard/Instructor/MyClass";
 import ManageClasses from "../Pages/Dashboard/Admin/ManageClasses";
+import ManageUser from "../Pages/Dashboard/Admin/ManageUser/ManageUser";
 
 export const router = createBrowserRouter([
   {
@@ -82,6 +83,10 @@ export const router = createBrowserRouter([
             path: "manageclasses",
             element: <ManageClasses />,
           },
+          {
+            path: 'manageuser',
+            element: <ManageUser/>
+          }
         ],
       },
     ],

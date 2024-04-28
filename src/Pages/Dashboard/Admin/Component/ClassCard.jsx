@@ -7,6 +7,7 @@ import {
 import useAxiosSecure from "../../../../Hooks/useAxiosSecure";
 import useClasses from "../../../../Hooks/useClasses";
 import Swal from "sweetalert2";
+import { toast } from "react-toastify";
 
 const ClassCard = ({ data }) => {
   const [isDisabled, setDisabled] = useState(false);
@@ -32,11 +33,13 @@ const ClassCard = ({ data }) => {
   const handleApprove = () => {
     setDisabled(true);
     axiosSecure.put(`/updateClass/${_id}`, { approveStatus: "approved" });
+    toast.success("Class Approved");
     refetch();
   };
   const handleDeny = () => {
     setDisabled(true);
     axiosSecure.put(`/updateClass/${_id}`, { approveStatus: "denied" });
+    toast.error("Class Denied");
     refetch();
   };
   const handleFeedback = async () => {
@@ -51,6 +54,7 @@ const ClassCard = ({ data }) => {
     });
     if (text) {
       axiosSecure.put(`/updateClass/${_id}`, { feedback: text });
+      toast.success("Feedback Sent");
       refetch();
     }
   };
@@ -108,18 +112,18 @@ const ClassCard = ({ data }) => {
         </div>
       </td>
       <td>
-        <div className="flex-col text-2xl">
-          <div>
+        <div className="flex flex-col text-2xl">
+          <div className="tooltip" data-tip="Approve">
             <button onClick={handleApprove} className="" disabled={isDisabled}>
               <FaRegCheckCircle className="text-green-700" />
             </button>
           </div>
-          <div>
+          <div className="tooltip" data-tip="Don't Approve">
             <button onClick={handleDeny} className="" disabled={isDisabled}>
-              <FaRegTimesCircle  className="text-red-700"/>
+              <FaRegTimesCircle className="text-red-700" />
             </button>
           </div>
-          <div>
+          <div className="tooltip" data-tip="Send Feedback">
             <button onClick={handleFeedback}>
               <FaInfoCircle className="text-teal-500" />
             </button>

@@ -77,7 +77,7 @@ const Checkout = ({ price, classID, title, cartID }) => {
           cartID: cartID,
         };
         axiosSecure.post("/payments", paymentDetails).then((res) => {
-          // navigate("/dashboard/Enrolled");
+          navigate("/dashboard/Enrolled");
         });
         toast("Payment Successful", { type: "success" });
       }

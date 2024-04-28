@@ -1,6 +1,11 @@
 import React from "react";
 import { FaMoneyCheck } from "react-icons/fa";
-import { FaChalkboardUser, FaCheckToSlot, FaRegUser } from "react-icons/fa6";
+import {
+  FaChalkboardUser,
+  FaCheckToSlot,
+  FaLaptopMedical,
+  FaRegUser,
+} from "react-icons/fa6";
 import { Link } from "react-router-dom";
 
 const DashboardNav = () => {
@@ -33,11 +38,13 @@ const DashboardNav = () => {
         <small className="text-center text-xs font-medium"> Enrolled </small>
       </Link>
       <Link
-        to={"payment"}
+        to={"addNewClass"}
         className="flex aspect-square hover:bg-indigo-100 min-h-[32px] w-16 flex-col items-center justify-center gap-1 rounded-md p-1.5 text-gray-700  "
       >
-        <FaMoneyCheck />
-        <small className="text-center text-xs font-medium"> Payment </small>
+        {/* <FaMoneyCheck /> */}
+        <FaLaptopMedical />
+
+        <small className="text-center text-xs font-medium">Add New </small>
       </Link>
     </nav>
   );

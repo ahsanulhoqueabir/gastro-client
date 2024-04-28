@@ -6,7 +6,7 @@ import Home from "../Pages/Home/Home";
 import Login from "../Pages/Login";
 import SignUp from "../Pages/SignUp";
 import Instructors from "../Pages/Instructors/Instructors";
-import AddClass from "../Pages/Admin/AddClass";
+import AddClass from "../Pages/Dashboard/Instructor/AddClass";
 import Classes from "../Pages/Classes/Classes";
 import StdDashboard from "../Pages/Dashboard/Student/StdDashboard";
 import SelectedClass from "../Pages/Dashboard/Student/SelectedClass";
@@ -52,6 +52,7 @@ export const router = createBrowserRouter([
             // path: "",
             // element: <SelectedClass />,
           },
+          // student route ----------------
           {
             path: "selectedClass",
             element: <SelectedClass />,
@@ -60,13 +61,14 @@ export const router = createBrowserRouter([
             path: "Enrolled",
             element: <EnrolledClass />,
           },
-          // {
-          //   path: "Payment",
-          //   element: <Payment />,
-          // },
           {
             path: "Payment/:id",
             element: <Payment />,
+          },
+          // instructor route ---------------
+          {
+            path: "addNewClass",
+            element: <AddClass />,
           },
         ],
       },

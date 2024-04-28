@@ -9,7 +9,7 @@ export default {
       {
         light: {
           primary: "#3A5151",
-          secondary: "#00a5b7",
+          secondary: "#B2E4E9",
           accent: "#0090ff",
           neutral: "#181119",
           "base-100": "#eafff5",

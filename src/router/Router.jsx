@@ -14,6 +14,7 @@ import EnrolledClass from "../Pages/Dashboard/Student/EnrolledClass";
 import Payment from "../Pages/Dashboard/Payment/Payment";
 import LoadingSpinner from "../Shared/LoadingSpinner";
 import MyClass from "../Pages/Dashboard/Instructor/MyClass";
+import ManageClasses from "../Pages/Dashboard/Admin/ManageClasses";
 
 export const router = createBrowserRouter([
   {
@@ -74,6 +75,12 @@ export const router = createBrowserRouter([
           {
             path: "myclass",
             element: <MyClass />,
+          },
+
+          // admin routes -------------------
+          {
+            path: "manageclasses",
+            element: <ManageClasses />,
           },
         ],
       },

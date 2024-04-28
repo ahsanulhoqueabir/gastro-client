@@ -5,6 +5,8 @@ import { FaRegCircleCheck, FaTrash } from "react-icons/fa6";
 const Card = ({ idx, item }) => {
   const { classname, availableseats, totalSeats, approveStatus, classimage } =
     item;
+    const feedback = "Recommended";
+    
   return (
     <tr className=" ">
       <td className="">
@@ -16,7 +18,7 @@ const Card = ({ idx, item }) => {
       </td>
       <td>
         <div className="flex flex-col gap-3 text-sm lg:text-lg">
-          <p className="font-medium">{`Class Name: ${classname}`}</p>
+          <p className="font-medium">{` ${classname}`}</p>
           <p>{`Enrolled: ${totalSeats - availableseats}`}</p>
         </div>
       </td>

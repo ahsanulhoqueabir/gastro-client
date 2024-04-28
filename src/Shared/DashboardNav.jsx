@@ -4,6 +4,7 @@ import {
   FaChalkboardUser,
   FaCheckToSlot,
   FaLaptopMedical,
+  FaPuzzlePiece,
   FaRegUser,
 } from "react-icons/fa6";
 import { Link } from "react-router-dom";
@@ -53,6 +54,17 @@ const DashboardNav = () => {
         <FaCheckToSlot />
 
         <small className="text-center text-xs font-medium"> my Class </small>
+      </Link>
+      <Link
+        to="manageclasses"
+        className="flex aspect-square hover:bg-indigo-100 min-h-[32px] w-16 flex-col items-center justify-center gap-1 rounded-md p-1.5 text-gray-700  "
+      >
+        <FaPuzzlePiece />
+
+        <small className="text-center text-xs font-medium">
+          {" "}
+          Manage Class{" "}
+        </small>
       </Link>
     </nav>
   );

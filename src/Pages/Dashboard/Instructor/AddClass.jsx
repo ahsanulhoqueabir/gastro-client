@@ -12,7 +12,6 @@ const AddClass = () => {
   const {
     register,
     handleSubmit,
-    watch,
     formState: { errors },
   } = useForm();
   const [, , refetch] = useClasses();
@@ -59,7 +58,7 @@ const AddClass = () => {
               type="text"
               className="w-full shadow-md shadow-teal-200 rounded-md placeholder:text-black bg-secondary py-2 px-4 focus:outline-none"
               placeholder="Enter Class Name"
-              {...register("classname", { required: false })}
+              {...register("classname", { required: true })}
             />
           </div>
           <div className="space-y-2">
@@ -68,7 +67,7 @@ const AddClass = () => {
               type="text"
               className="w-full shadow-md shadow-teal-200 rounded-md placeholder:text-black bg-secondary py-2 px-4 focus:outline-none"
               placeholder="Enter Class Details"
-              {...register("classdetails", { required: false })}
+              {...register("classdetails", { required: true })}
             />
           </div>
           <div className="space-y-2">
@@ -76,7 +75,7 @@ const AddClass = () => {
             <input
               type="file"
               className="w-full shadow-md shadow-teal-200 rounded-md placeholder:text-black bg-secondary py-2 px-4 focus:outline-none"
-              {...register("classimage", { required: false })}
+              {...register("classimage", { required: true })}
             />
           </div>
           <div className="space-y-2">
@@ -86,7 +85,7 @@ const AddClass = () => {
               className="w-full shadow-md shadow-teal-200 rounded-md placeholder:text-black bg-secondary py-2 px-4 focus:outline-none"
               readOnly
               value={info?.name}
-              {...register("classinstructor", { required: false })}
+              {...register("classinstructor", { required: true })}
             />
           </div>
           <div className="space-y-2">
@@ -105,7 +104,7 @@ const AddClass = () => {
               type="number"
               className="w-full shadow-md shadow-teal-200 rounded-md placeholder:text-black bg-secondary py-2 px-4 focus:outline-none"
               placeholder="Enter Available Seats"
-              {...register("availableseats", { required: false })}
+              {...register("availableseats", { required: true })}
             />
           </div>
           <div className="space-y-2">
@@ -114,7 +113,7 @@ const AddClass = () => {
               type="number"
               className="w-full shadow-md shadow-teal-200 rounded-md placeholder:text-black bg-secondary py-2 px-4 focus:outline-none"
               placeholder="Enter Price "
-              {...register("price", { required: false })}
+              {...register("price", { required: true })}
             />
           </div>
           <Button>Submit</Button>

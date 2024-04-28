@@ -1,5 +1,5 @@
 import RouteTitle from "../../utilities/RouteTitle";
-import PopularClass from "./Component/PopularClass";
+import PopularClass from "./Component/PopularClass/PopularClass";
 import Slider from "./Component/Slider";
 
 const Home = () => {

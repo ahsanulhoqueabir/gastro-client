@@ -5,6 +5,7 @@ import { toast } from "react-toastify";
 import useClasses from "../../../Hooks/useClasses";
 import useUserData from "../../../Hooks/useUserData";
 import useAxiosSecure from "../../../Hooks/useAxiosSecure";
+import Swal from "sweetalert2";
 
 const AddClass = () => {
   const [info] = useUserData();
@@ -30,7 +31,6 @@ const AddClass = () => {
     const imgData = new FormData();
     const photoFile = data.classimage[0];
     imgData.append("image", photoFile);
-
     if (photoFile) {
       await fetch(img_hosting_url, {
         method: "POST",
@@ -43,9 +43,21 @@ const AddClass = () => {
           }
         });
     }
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, add it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        axiosSecure.post("/allclasses", classData);
+        toast("Added Successfully");
+      }
+    });
 
-    axiosSecure.post("/allclasses", classData);
-    toast("Added Successfully");
     refetch();
   };
   return (

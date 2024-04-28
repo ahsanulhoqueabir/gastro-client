@@ -18,6 +18,7 @@ import ManageClasses from "../Pages/Dashboard/Admin/ManageClasses";
 import ManageUser from "../Pages/Dashboard/Admin/ManageUser/ManageUser";
 import InstructorRoute from "./InstructorRoute";
 import AdminAccess from "./AdminAccess";
+import Profile from "../Pages/Dashboard/Profile/Profile";
 
 export const router = createBrowserRouter([
   {
@@ -53,6 +54,10 @@ export const router = createBrowserRouter([
         path: "dashboard",
         element: <StdDashboard />,
         children: [
+          {
+            path: "",
+            element: <Profile />,
+          },
           // student route ----------------
           {
             path: "selectedClass",

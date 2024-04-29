@@ -23,9 +23,12 @@ const useUserData = () => {
       // });
       // const data = await response.json();
       // return data;
-      const response = await axiosSecure.get(
-        `/getUserByemail?email=${user?.email}`
-      );
+      let response = {};
+      if (user) {
+        response = await axiosSecure.get(
+          `/getUserByemail?email=${user?.email}`
+        );
+      }
 
       return response.data.data;
     },

@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
 // import "../styles/common.css";
-const Checkout = ({ price, classID, title, cartID }) => {
+const Checkout = ({ price, classID, title, cartID, instructorEmail }) => {
   const [info] = useUserData();
   const stripe = useStripe();
   const elements = useElements();
@@ -75,6 +75,7 @@ const Checkout = ({ price, classID, title, cartID }) => {
           status: "paid",
           id: classID,
           cartID: cartID,
+          instructorEmail: instructorEmail,
         };
         axiosSecure.post("/payments", paymentDetails).then((res) => {
           navigate("/dashboard/Enrolled");

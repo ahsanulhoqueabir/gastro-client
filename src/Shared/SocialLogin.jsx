@@ -18,7 +18,7 @@ const SocialLogin = () => {
           name: res.user.displayName,
           email: res.user.email,
           photo: res.user.photoURL,
-          role: "user",
+          role: "student",
         };
         fetch("http://localhost:3000/users", {
           method: "POST",

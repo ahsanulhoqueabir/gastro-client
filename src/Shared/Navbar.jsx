@@ -1,58 +1,141 @@
-import { Link, NavLink } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import useThemeControl from "../Hooks/ThemeControl";
 import logo from "../assets/favicon.png";
-import { FaArrowRightToBracket } from "react-icons/fa6";
-import { useContext } from "react";
-import { authContext } from "../ContextProvider/AuthProvider";
+import {
+  FaArrowRightToBracket,
+  FaChalkboardUser,
+  FaCheckToSlot,
+  FaLaptopMedical,
+  FaPowerOff,
+  FaPuzzlePiece,
+  FaUserTie,
+  FaUsersRays,
+} from "react-icons/fa6";
 import LoadingNavbar from "./LoadingNavbar";
 import useAuth from "../Hooks/useAuth";
+import useUserRole from "../Hooks/useUserRole";
+import { FaChalkboardTeacher, FaHome, FaUsersCog } from "react-icons/fa";
 
 const Navbar = () => {
   const [theme, handleToggle] = useThemeControl();
   const { user, authLoading, logout } = useAuth();
+  const role = useUserRole();
+  const navigate = useNavigate();
+  const handleLogout = () => {
+    localStorage.removeItem("access-token");
+    logout();
+    navigate("/");
+  };
   const fields = (
     <>
-      <li>
-        <NavLink
-          className={({ isActive }) =>
-            isActive ? "text-blue-700 navBtn " : "navBtn "
-          }
-          to={"/"}
-        >
-          Home
-        </NavLink>
-      </li>
-      <li>
-        <NavLink
-          className={({ isActive }) =>
-            isActive ? "text-blue-700 navBtn " : "navBtn "
-          }
-          to={"/instructors"}
-        >
-          Instructors
-        </NavLink>
-      </li>
-      <li>
-        <NavLink
-          className={({ isActive }) =>
-            isActive ? "text-blue-700 navBtn " : "navBtn "
-          }
-          to={"/classes"}
-        >
-          Classes
-        </NavLink>
-      </li>
+      <Link
+        className="flex justify-start hover:bg-indigo-100 dark:hover:bg-teal-400    items-center  gap-1 rounded-md   "
+        to={"/"}
+      >
+        <FaHome />
+        <small>Home</small>
+      </Link>
+
+      <Link
+        className="flex justify-start hover:bg-indigo-100   items-center  gap-1 rounded-md   "
+        to={"/instructors"}
+      >
+        <FaUsersRays />
+        <small>Instructors</small>
+      </Link>
+
+      <Link
+        className="flex justify-start hover:bg-indigo-100   items-center  gap-1 rounded-md   "
+        to={"/classes"}
+      >
+        <FaChalkboardTeacher />
+        <small>Classes</small>
+      </Link>
+
       {user && (
-        <li>
-          <NavLink
-            className={({ isActive }) =>
-              isActive ? "text-blue-700 navBtn " : "navBtn "
-            }
+        <>
+          <p className="text-xs"> --- Dashboard ---</p>
+
+          <Link
+            className="flex justify-start hover:bg-indigo-100   items-center  gap-1 rounded-md   "
             to={"/dashboard"}
           >
-            Dashboard
-          </NavLink>
-        </li>
+            <FaUserTie />
+            <small>Profile</small>
+          </Link>
+        </>
+      )}
+      {role === "student" && (
+        <>
+          <Link
+            to="selectedclass"
+            className="flex  hover:bg-indigo-100   items-center justify-center gap-1 rounded-md   "
+          >
+            <FaCheckToSlot />
+
+            <small className=""> Selected </small>
+          </Link>
+
+          <Link
+            to={"Enrolled"}
+            className="flex  hover:bg-indigo-100   items-center justify-center gap-1 rounded-md   "
+          >
+            <FaChalkboardUser />
+
+            <small className=""> Enrolled </small>
+          </Link>
+        </>
+      )}
+      {role === "instructor" && (
+        <>
+          <Link
+            to={"addNewClass"}
+            className="flex  hover:bg-indigo-100   items-center justify-center gap-1 rounded-md   "
+          >
+            {/* <FaMoneyCheck /> */}
+            <FaLaptopMedical />
+
+            <small className="">Add New </small>
+          </Link>
+          <Link
+            to="myclass"
+            className="flex  hover:bg-indigo-100   items-center justify-center gap-1 rounded-md   "
+          >
+            <FaCheckToSlot />
+
+            <small className=""> my Class </small>
+          </Link>
+        </>
+      )}
+      {role === "admin" && (
+        <>
+          <Link
+            to="manageclasses"
+            className="flex  hover:bg-indigo-100   items-center justify-center gap-1 rounded-md   "
+          >
+            <FaPuzzlePiece />
+
+            <small className=""> Manage Class </small>
+          </Link>
+          <Link
+            to="manageuser"
+            className="flex  hover:bg-indigo-100   items-center justify-center gap-1 rounded-md   "
+          >
+            <FaUsersCog />
+
+            <small className=""> Manage Users </small>
+          </Link>
+        </>
+      )}
+      {user && (
+        <button
+          onClick={handleLogout}
+          className="flex  hover:bg-indigo-100   items-center justify-start gap-1 rounded-md   "
+        >
+          <FaPowerOff />
+
+          <small className=""> Logout </small>
+        </button>
       )}
     </>
   );
@@ -61,64 +144,67 @@ const Navbar = () => {
   }
   return (
     <div className="navbar bg-base-200 lg:px-20">
-      <div className="navbar-start">
-        <div className="dropdown">
-          <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="h-5 w-5"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
+      <div className="navbar-start justify-start">
+        <div className="drawer">
+          <input id="my-drawer" type="checkbox" className="drawer-toggle" />
+          <div className="drawer-content ">
+            <label
+              htmlFor="my-drawer"
+              className=" cursor-pointer drawer-button"
             >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M4 6h16M4 12h8m-8 6h16"
-              />
-            </svg>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="lg:size-10 size-6 rounded-full p-2 border-2 border-teal-500 text-green-700"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="M4 6h16M4 12h8m-8 6h16"
+                />
+              </svg>
+            </label>
           </div>
-          <ul
-            tabIndex={0}
-            className="menu menu-sm dropdown-content mt-3 z-[1] p-2 gap-2 shadow bg-base-100 rounded-box w-52"
-          >
-            {fields}
-          </ul>
+          <div className="drawer-side z-50">
+            <label
+              htmlFor="my-drawer"
+              aria-label="close sidebar"
+              className="drawer-overlay"
+            ></label>
+            <ul className="menu p-4 w-fit  min-h-full bg-white text-black lg:text-2xl gap-3">
+              {fields}
+            </ul>
+          </div>
         </div>
-        <Link to="/">
-          <div className="flex items-center gap-2">
-            <img src={logo} className="size-10" alt="" />
-            <div>
-              <h2 className="font-bold">Gastronomix</h2>
-              <p className="text-xs">Culinary Academy</p>
+        <div>
+          <Link to="/">
+            <div className="flex items-center gap-2">
+              <img src={logo} className="size-10" alt="" />
+              <div>
+                <h2 className="font-bold">Gastronomix</h2>
+                <p className="text-xs">Culinary Academy</p>
+              </div>
             </div>
-          </div>
-        </Link>
+          </Link>
+        </div>
       </div>
-      <div className="navbar-center hidden lg:flex">
-        <ul className="menu menu-horizontal px-1 gap-3">{fields}</ul>
-      </div>
-      <div className="navbar-end">
+
+      <div className="navbar-end pr-2">
         {user ? (
           <div className="dropdown dropdown-end">
             <div
-              tabIndex={0}
-              role="button"
-              className="btn btn-ghost btn-circle avatar"
+              className="w-10 rounded-full tooltip tooltip-left "
+              data-tip={user.displayName}
             >
-              <div className="w-10 rounded-full">
-                <img alt={user.displayName} src={user.photoURL} />
-              </div>
+              <img
+                className="rounded-full"
+                alt={user.displayName}
+                src={user.photoURL}
+              />
             </div>
-            <ul
-              tabIndex={0}
-              className="mt-3 z-[1] p-2 shadow menu menu-sm dropdown-content bg-base-100 rounded-box w-52"
-            >
-              <li>
-                <p onClick={logout}>Logout</p>
-              </li>
-            </ul>
           </div>
         ) : (
           <Link

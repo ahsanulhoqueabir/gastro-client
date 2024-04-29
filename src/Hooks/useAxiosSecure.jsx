@@ -9,11 +9,9 @@ const axiosSecure = axios.create({
 const useAxiosSecure = () => {
   const { logout, user } = useAuth();
   const navigate = useNavigate();
-  // useEffect(() => {
   axiosSecure.interceptors.request.use(
     (config) => {
       const token = localStorage.getItem("access-token");
-      // config.headers.Authorization = `Bearer ${token}`;
       config.headers.authorization = `Bearer ${token}`;
       return config;
     },
@@ -35,7 +33,6 @@ const useAxiosSecure = () => {
       return Promise.reject(error);
     }
   );
-  // }, [user, logout, navigate]);
   return [axiosSecure];
 };
 

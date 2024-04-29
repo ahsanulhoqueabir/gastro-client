@@ -12,6 +12,7 @@ const Payment = () => {
   const price = currClass.price;
   const classID = currClass.classID;
   const title = currClass.classname;
+  const instructorEmail = currClass.instructormail;
   return (
     <>
       <PageBanner>Payment Page</PageBanner>
@@ -22,6 +23,7 @@ const Payment = () => {
             classID={classID}
             title={title}
             price={price}
+            instructorEmail={instructorEmail}
           />
         </Elements>
       </div>

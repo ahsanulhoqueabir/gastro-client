@@ -46,15 +46,33 @@ const SignUp = () => {
     return true;
   };
 
-  const onSubmit = (data) => {
+  const onSubmit = async (data) => {
+    const allData = { ...data, role: "student" };
+    const apiURL = import.meta.env.VITE_IMG_DB;
+    const img_hosting_url = `https://api.imgbb.com/1/upload?key=${apiURL}`;
+    const imgData = new FormData();
+    const photoFile = data.photo[0];
+    imgData.append("image", photoFile);
+    if (photoFile) {
+      await fetch(img_hosting_url, {
+        method: "POST",
+        body: imgData,
+      })
+        .then((res) => res.json())
+        .then((p) => {
+          if (p.success === true) {
+            allData.photo = p.data.display_url;
+          }
+        });
+    }
     signUpewithemail(data.email, data.password)
       .then((res) => {
         fetch("http://localhost:3000/users", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(data, (data.role = "student")),
+          body: JSON.stringify(allData),
         });
-        profileUpdate(data.name, data.photo);
+        profileUpdate(allData.name, allData.photo);
         toast("Your Sign Up is successfull");
         navigate("/");
       })
@@ -122,9 +140,9 @@ const SignUp = () => {
               {errors.repassword && <p>{errors.repassword.message}</p>}
             </div>
             <div className="space-y-2">
-              <label className=" font-medium">Photo URL*</label>
+              <label className=" font-medium">Upload Photo *</label>
               <input
-                type="text"
+                type="file"
                 className="w-full shadow-md shadow-teal-200 rounded-md placeholder:text-black bg-secondary py-2 px-4 focus:outline-none"
                 placeholder="Enter a valid Photo URL"
                 {...register("photo", { required: true })}

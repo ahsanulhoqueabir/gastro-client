@@ -5,6 +5,7 @@ import { authContext } from "../../ContextProvider/AuthProvider";
 import { useLocation, useNavigate } from "react-router-dom";
 import useUserRole from "../../Hooks/useUserRole";
 import Swal from "sweetalert2";
+import { toast } from "react-toastify";
 const ClassCard = ({ item }) => {
   const { user } = useContext(authContext);
   let userRole;
@@ -64,10 +65,7 @@ const ClassCard = ({ item }) => {
             .then((res) => res.json())
             .then((data) => {
               if (data) {
-                Swal.fire({
-                  title: "Class Added Successfully",
-                  icon: "success",
-                });
+                toast.success("Class Selected Successfully");
               }
             });
         }

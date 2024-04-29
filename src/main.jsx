@@ -8,6 +8,10 @@ import { router } from "./Router/Router.jsx";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import DataProvider from "./ContextProvider/DataProvider.jsx";
+// import "@sweetalert2/theme-bulma/bulma.scss";
+// import "sweetalert2/dist/sweetalert2.min.css";
+// import "bulma/css/bulma.min.css";
+
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 const queryClient = new QueryClient();
 ReactDOM.createRoot(document.getElementById("root")).render(

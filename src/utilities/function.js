@@ -1,4 +1,5 @@
 const sortClass = (data) => {
+  data = data.filter((element) => element.availableseats !== 0);
   data.forEach((element) => {
     element.difference = element.totalSeats - element.availableseats;
   });

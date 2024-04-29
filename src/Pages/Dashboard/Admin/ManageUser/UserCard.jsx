@@ -2,8 +2,10 @@ import React, { useState } from "react";
 import { FaUserSecret, FaUserShield } from "react-icons/fa6";
 import useAxiosSecure from "../../../../Hooks/useAxiosSecure";
 import { toast } from "react-toastify";
+import useInstructor from "../../../../Hooks/useInstructor";
 
 const UserCard = ({ user, refetch }) => {
+  const [, , refetchInstructor] = useInstructor();
   const [isAdminDisabled, setIsAdminDisabled] = useState(
     user?.role === "admin"
   );
@@ -18,6 +20,7 @@ const UserCard = ({ user, refetch }) => {
     setIsInstructorDisabled(false);
     toast.success("User role updated to Admin");
     refetch();
+    refetchInstructor();
   };
   const handleInstructor = () => {
     user.role = "instructor";
@@ -26,6 +29,7 @@ const UserCard = ({ user, refetch }) => {
     setIsAdminDisabled(false);
     toast.success("User role updated to Instructor");
     refetch();
+    refetchInstructor();
   };
   return (
     <tr>

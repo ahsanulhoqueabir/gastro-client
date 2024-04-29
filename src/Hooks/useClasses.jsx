@@ -18,7 +18,8 @@ const useClasses = () => {
     },
   });
   if (classes.length > 0) {
-    sortedPopularClass = sortClass(classes);
+    const tempArray = [...classes];
+    sortedPopularClass = sortClass(tempArray);
   }
   return [classes, classLoading, refetch, sortedPopularClass];
 };

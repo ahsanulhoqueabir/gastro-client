@@ -50,7 +50,10 @@ const ClassCard = ({ data }) => {
       inputAttributes: {
         "aria-label": "Type your message here",
       },
-      showCancelButton: true,
+      theme: "bulma",
+      confirmButtonText: "Send Feedback",
+      confirmButtonColor: "#008000",
+      showCloseButton: true,
     });
     if (text) {
       axiosSecure.put(`/updateClass/${_id}`, { feedback: text });
@@ -98,7 +101,7 @@ const ClassCard = ({ data }) => {
           <p>
             <span>Status: </span>
             <span
-              className={`capitalize rounded-xl px-3 py-0.5 ${
+              className={`capitalize text-xs rounded-xl px-3 py-0.5 ${
                 approveStatus === "pending"
                   ? "bg-yellow-200 text-yellow-700"
                   : approveStatus === "approved"

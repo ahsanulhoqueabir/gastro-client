@@ -4,11 +4,12 @@ import anim from "/src/assets/loginpage.json";
 import { useForm } from "react-hook-form";
 import Button from "../Components/Button/Button";
 import SocialLogin from "../Shared/SocialLogin";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { authContext } from "../ContextProvider/AuthProvider";
 import RouteTitle from "../utilities/RouteTitle";
 const SignUp = () => {
+  const navigate = useNavigate();
   RouteTitle("Sign Up");
   const { signUpewithemail, profileUpdate } = useContext(authContext);
   const {
@@ -55,6 +56,7 @@ const SignUp = () => {
         });
         profileUpdate(data.name, data.photo);
         toast("Your Sign Up is successfull");
+        navigate("/");
       })
       .catch((err) => toast(err));
   };

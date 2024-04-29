@@ -3,18 +3,21 @@ import { FaBangladeshiTakaSign } from "react-icons/fa6";
 import Explore from "../../Components/Button/Explore";
 import { authContext } from "../../ContextProvider/AuthProvider";
 import { useLocation, useNavigate } from "react-router-dom";
+import useUserRole from "../../Hooks/useUserRole";
 import Swal from "sweetalert2";
 const ClassCard = ({ item }) => {
-  const { user, userRole } = useContext(authContext);
+  const { user } = useContext(authContext);
+  let userRole;
+  if (user) {
+    userRole = useUserRole();
+  }
   const location = useLocation();
   const navigate = useNavigate();
 
   const isDisabled = () => {
-    if (
-      item.availableseats === 0 ||
-      userRole === "admin" ||
-      userRole === "instructor"
-    ) {
+    if (item.availableseats === 0) {
+      return true;
+    } else if (user && (userRole === "admin" || userRole === "instructor")) {
       return true;
     } else {
       return false;

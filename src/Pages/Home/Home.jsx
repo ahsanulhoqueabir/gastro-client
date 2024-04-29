@@ -1,5 +1,6 @@
 import RouteTitle from "../../utilities/RouteTitle";
 import PopularClass from "./Component/PopularClass/PopularClass";
+import PopularInstructor from "./Component/PopularInstructor/PopularInstructor";
 import Slider from "./Component/Slider";
 
 const Home = () => {
@@ -8,6 +9,7 @@ const Home = () => {
     <div>
       <Slider />
       <PopularClass />
+      <PopularInstructor />
     </div>
   );
 };

@@ -1,6 +1,7 @@
 import { Outlet } from "react-router-dom";
 import Navbar from "./Shared/Navbar";
 import Footer from "./Shared/Footer";
+import "sweetalert2/dist/sweetalert2.min.css";
 
 const App = () => {
   return (

@@ -59,6 +59,8 @@ const ClassCard = ({ data }) => {
       axiosSecure.put(`/updateClass/${_id}`, { feedback: text });
       toast.success("Feedback Sent");
       refetch();
+    } else {
+      toast.error("Feedback cannot be empty!");
     }
   };
   return (

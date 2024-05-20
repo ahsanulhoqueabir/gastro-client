@@ -4,9 +4,8 @@ import useAuth from "./useAuth";
 const useUserData = () => {
   const { user, authLoading } = useAuth();
   const [axiosSecure] = useAxiosSecure();
+  const token = localStorage.getItem("access-token");
 
-  let selectedClass = [];
-  let enrolledClass = [];
   let {
     isPending: infoLoading,
     refetch,
@@ -15,31 +14,19 @@ const useUserData = () => {
     queryKey: ["info"],
     enabled: !authLoading,
     queryFn: async () => {
-      // const url = `http://localhost:3000/getUserByemail?email=${user?.email}`;
-      // const response = await fetch(url, {
-      //   headers: {
-      //     Authorization: `Bearer ${token}`,
-      //   },
-      // });
-      // const data = await response.json();
-      // return data;
       let response = {};
       if (user) {
-        response = await axiosSecure.get(
-          `/getUserByemail?email=${user?.email}`
-        );
+        response = await axiosSecure.get(`/users/query?email=${user?.email}`, {
+          headers: {
+            authorization: `Bearer ${token}`,
+          },
+        });
       }
 
-      return response.data.data;
+      return response.data[0];
     },
   });
-  return [
-    info,
-    infoLoading,
-    refetch,
-    (selectedClass = info?.selectedClass),
-    (enrolledClass = info?.enrolledClass),
-  ];
+  return [info, infoLoading, refetch];
 };
 
 // info, infoLoading, refetch, selectedClass, enrolledClass

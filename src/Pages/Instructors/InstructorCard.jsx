@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import DetailsButton from "../../Components/Button/DetailsButton";
 
 const InstructorCard = ({ class: cls }) => {
-  const { photo, name, email, classCount, _id } = cls;
+  const { photo, name, email, course, _id } = cls;
   const naviagte = useNavigate();
   return (
     <tr className=" ">
@@ -16,18 +16,27 @@ const InstructorCard = ({ class: cls }) => {
           alt=""
         />
       </td>
-      <td className="flex-col flex justify-between text-wrap">
-        <h1 className="font-bold lg:text-2xl text-wrap">{name}</h1>
-        <p className="text-wrap">
-          <a href={`mailto:${email}`}>{email}</a>
-        </p>
-        <p>
-          <span className="font-semibold">Class Conducted: </span> {classCount}
-        </p>
+      <td className="">
+        <div className="flex-col flex gap-2 justify-between text-wrap">
+          <h1 className="font-bold lg:text-2xl text-wrap">{name}</h1>
+          <p className="text-wrap">
+            <a href={`mailto:${email}`}>{email}</a>
+          </p>
+          <p>
+            <span className="font-semibold">Class Conducted: </span>{" "}
+            {course?.length}
+          </p>
+        </div>
       </td>
       <td>
-        <DetailsButton onClick={() => naviagte(`instructorDetails/${_id}`)}>
-          See Details
+        <DetailsButton
+          onClick={() =>
+            naviagte(`/classes/${_id}`, {
+              state: { instructor: name, courses: course },
+            })
+          }
+        >
+          See Classes
         </DetailsButton>
       </td>
     </tr>

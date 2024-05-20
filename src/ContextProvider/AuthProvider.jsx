@@ -11,7 +11,8 @@ import {
   signOut,
   updateProfile,
 } from "firebase/auth";
-import axios from "axios";
+// import axios from "axios";
+import axios, { Axios } from "axios";
 
 export const authContext = createContext(null);
 const auth = getAuth(app);
@@ -61,7 +62,7 @@ const AuthProvider = ({ children }) => {
       }
       if (user) {
         axios
-          .post("http://localhost:3000/jwt", {
+          .post("http://localhost:5000/api/v1/verify/jwt", {
             email: user?.email,
           })
           .then((res) => {

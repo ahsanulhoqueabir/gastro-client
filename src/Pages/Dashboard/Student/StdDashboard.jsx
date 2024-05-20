@@ -1,15 +1,21 @@
-import React from "react";
+import React, { useState } from "react";
 import DashboardNav from "../../../Shared/DashboardNav";
 import { Outlet } from "react-router-dom";
 
 const StdDashboard = () => {
+  const [open, setOpen] = useState(false);
+
   return (
-    <div className=" relative  min-w-screen min-h-screen">
-      <DashboardNav />
-      <div>
-        <Outlet />
+    <>
+      <div className=" flex min-h-screen h-full">
+        <div className=" h-lvh">
+          <DashboardNav open={open} setOpen={setOpen} />
+        </div>
+        <div className="w-full">
+          <Outlet />
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 

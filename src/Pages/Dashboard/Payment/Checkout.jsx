@@ -1,31 +1,38 @@
 import React, { useEffect, useState } from "react";
 import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
 import useAxiosSecure from "../../../Hooks/useAxiosSecure";
+import useAxiosPublic from "../../../Hooks/useAxiosPublic";
 import useUserData from "../../../Hooks/useUserData";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
 // import "../styles/common.css";
-const Checkout = ({ price, classID, title, cartID, instructorEmail }) => {
+//  price, classID, title, cartID, instructorEmail;
+const Checkout = ({ data }) => {
   const [info] = useUserData();
   const stripe = useStripe();
   const elements = useElements();
   const [axiosSecure] = useAxiosSecure();
+  const axiosPublic = useAxiosPublic();
   const [cardErr, setErr] = useState("");
   const [clientSecret, setClientSecret] = useState("");
   const [traxID, setTraxID] = useState("");
   const navigate = useNavigate();
+  // console.log(data);
   useEffect(() => {
-    axiosSecure
-      .post("/create-checkout-session", {
-        price: price,
-      })
-      .then((res) => {
-        setClientSecret(res.data.clientSecret);
-      });
-  }, []);
+    if (data.classPrice !== null) {
+      axiosPublic
+        .post("/payment/create-payment-intent", {
+          price: data.classPrice,
+        })
+        .then((res) => {
+          setClientSecret(res.data.clientSecret);
+        });
+    }
+  }, [data]);
   const handleSubmit = async (e) => {
     e.preventDefault();
+
     if (!stripe || !elements) {
       return;
     }
@@ -68,18 +75,18 @@ const Checkout = ({ price, classID, title, cartID, instructorEmail }) => {
         const paymentDetails = {
           name: info?.name,
           email: info?.email,
-          amount: price,
+          price: data.classPrice,
           date: new Date().toISOString(),
           traxId: paymentIntent.id,
-          title: title,
+          course: data._id,
           status: "paid",
-          id: classID,
-          cartID: cartID,
-          instructorEmail: instructorEmail,
+          user: info._id,
         };
-        axiosSecure.post("/payments", paymentDetails).then((res) => {
-          navigate("/dashboard/Enrolled");
-        });
+        axiosPublic
+          .post("/payment/completePayments", paymentDetails)
+          .then((res) => {
+            navigate("/dashboard/Enrolled");
+          });
         toast("Payment Successful", { type: "success" });
       }
     }

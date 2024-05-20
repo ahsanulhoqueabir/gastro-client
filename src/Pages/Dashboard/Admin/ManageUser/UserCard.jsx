@@ -2,10 +2,8 @@ import React, { useState } from "react";
 import { FaUserSecret, FaUserShield } from "react-icons/fa6";
 import useAxiosSecure from "../../../../Hooks/useAxiosSecure";
 import { toast } from "react-toastify";
-import useInstructor from "../../../../Hooks/useInstructor";
 
-const UserCard = ({ user, refetch }) => {
-  const [, , refetchInstructor] = useInstructor();
+const UserCard = ({ user }) => {
   const [isAdminDisabled, setIsAdminDisabled] = useState(
     user?.role === "admin"
   );
@@ -14,22 +12,17 @@ const UserCard = ({ user, refetch }) => {
   );
   const [axiosSecure] = useAxiosSecure();
   const handleAdmin = () => {
-    user.role = "admin";
-    axiosSecure.put(`/updateUserRole/${user?.email}`, user);
+    axiosSecure.put(`/users/updaterole?email=${user?.email}&role=admin`);
     setIsAdminDisabled(!isAdminDisabled);
     setIsInstructorDisabled(false);
     toast.success("User role updated to Admin");
-    refetch();
-    refetchInstructor();
   };
   const handleInstructor = () => {
-    user.role = "instructor";
-    axiosSecure.put(`/updateUserRole/${user?.email}`, user);
+    // user.role = "instructor";
+    axiosSecure.put(`/users/updaterole?email=${user?.email}&role=instructor`);
     setIsInstructorDisabled(!isInstructorDisabled);
     setIsAdminDisabled(false);
     toast.success("User role updated to Instructor");
-    refetch();
-    refetchInstructor();
   };
   return (
     <tr>

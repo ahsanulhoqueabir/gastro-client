@@ -1,12 +1,23 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import useAllUser from "../../../../Hooks/useAllUser";
 import LoadingSpinner from "../../../../Shared/LoadingSpinner";
 import PageBanner from "../../../../Components/PageBanner";
 import { FaUserSecret, FaUserShield } from "react-icons/fa6";
 import UserCard from "./UserCard";
+import useAxiosSecure from "../../../../Hooks/useAxiosSecure";
 
 const ManageUser = () => {
-  const [allUser, allUserLoading, refetch] = useAllUser();
+  // const [allUser, allUserLoading, refetch] = useAllUser();
+  const [allUser, setUser] = useState([]);
+  const [allUserLoading, setAllUserLoading] = useState(true);
+  const [axiosSecure] = useAxiosSecure();
+  useEffect(() => {
+    axiosSecure.get("/users/alluser").then((res) => {
+      console.log("Users: ", res.data);
+      setUser(res.data);
+      setAllUserLoading(false);
+    });
+  }, []);
   if (allUserLoading) {
     return <LoadingSpinner />;
   }
@@ -27,7 +38,7 @@ const ManageUser = () => {
             </thead>
             <tbody>
               {allUser.map((user, idx) => (
-                <UserCard user={user} key={idx} refetch={refetch} />
+                <UserCard user={user} key={idx} />
               ))}
             </tbody>
           </table>

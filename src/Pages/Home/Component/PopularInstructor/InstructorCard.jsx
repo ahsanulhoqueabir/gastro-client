@@ -1,13 +1,17 @@
 import React from "react";
 
 const InstructorCard = ({ data }) => {
-  const { photo, name, email, classCount, studentCount } = data;
+  const { photo, name, email, course, enrolledStudentCount } = data;
   return (
     <div className="size-full mx-auto  flex  items-center justify-center ">
       <div className="group relative  ">
         <img
           className="size-36 lg:size-60  object-cover scale-105 transform rounded-lg bg-black/70"
-          src={photo ? photo : "https://i.ibb.co/84zM7hh/40377-1.jpg"}
+          src={
+            photo
+              ? photo
+              : "https://placehold.co/500x500/000000/FFFFFF/png?text=User+image"
+          }
           alt="profile picture"
         />
       </div>
@@ -19,11 +23,11 @@ const InstructorCard = ({ data }) => {
         <div className="flex flex-wrap flex-col lg:flex-row items-start lg:items-center lg:justify-between">
           <div className="space-y-1 flex justify-center gap-3 items-center lg:block">
             <p className="font-sans text-sm  font-semibold">Class</p>
-            <p className=" tracking-wider /80 ">{classCount}</p>
+            <p className=" tracking-wider /80 ">{course?.length || 0}</p>
           </div>
           <div className="space-y-1 flex justify-center gap-3 items-center lg:block">
             <p className="font-sans text-sm font-semibold">Enrolled Students</p>
-            <p className=" tracking-wider /80 ">{studentCount}</p>
+            <p className=" tracking-wider /80 ">{enrolledStudentCount}</p>
           </div>
         </div>
         <div>

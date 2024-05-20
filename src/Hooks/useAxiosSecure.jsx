@@ -4,7 +4,8 @@ import axios from "axios";
 import useAuth from "./useAuth";
 
 const axiosSecure = axios.create({
-  baseURL: "http://localhost:3000",
+  // baseURL: "http://localhost:5000/api/v1",
+  baseURL: "http://localhost:5000/api/v1",
 });
 const useAxiosSecure = () => {
   const { logout, user } = useAuth();

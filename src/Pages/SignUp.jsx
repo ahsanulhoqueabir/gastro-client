@@ -8,6 +8,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { authContext } from "../ContextProvider/AuthProvider";
 import RouteTitle from "../utilities/RouteTitle";
+import axios from "axios";
 const SignUp = () => {
   const navigate = useNavigate();
   RouteTitle("Sign Up");
@@ -46,37 +47,55 @@ const SignUp = () => {
     return true;
   };
 
-  const onSubmit = async (data) => {
-    const allData = { ...data, role: "student" };
-    const apiURL = import.meta.env.VITE_IMG_DB;
-    const img_hosting_url = `https://api.imgbb.com/1/upload?key=${apiURL}`;
-    const imgData = new FormData();
-    const photoFile = data.photo[0];
-    imgData.append("image", photoFile);
-    if (photoFile) {
-      await fetch(img_hosting_url, {
-        method: "POST",
-        body: imgData,
-      })
-        .then((res) => res.json())
-        .then((p) => {
-          if (p.success === true) {
-            allData.photo = p.data.display_url;
-          }
-        });
+  const photoUpload = async (data) => {
+    try {
+      const apiURL = import.meta.env.VITE_IMG_DB;
+
+      const response = await axios.post(
+        "https://api.imgbb.com/1/upload?key=bf3d904125e47ee4c379b584a1da5d6b",
+        data
+      );
+      return response.data.data.display_url;
+    } catch (error) {
+      console.log(error);
     }
-    signUpewithemail(data.email, data.password)
+  };
+  const handleUserCreate = async (email, password, name, photo) => {
+    signUpewithemail(email, password)
       .then((res) => {
-        fetch("http://localhost:3000/users", {
+        fetch("http://localhost:5000/api/v1/users/create", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(allData),
         });
-        profileUpdate(allData.name, allData.photo);
+        profileUpdate(name, photo);
         toast("Your Sign Up is successfull");
         navigate("/");
       })
       .catch((err) => toast(err));
+  };
+  const onSubmit = async (data) => {
+    const allData = { ...data };
+    const imgData = new FormData();
+    const photoFile = data.photo[0];
+    imgData.append("image", photoFile);
+    const photo = await photoUpload(imgData);
+    if (photo) {
+      await signUpewithemail(data.email, data.password);
+      allData.photo = photo;
+
+      fetch("http://localhost:5000/api/v1/users/create", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(allData),
+      });
+
+      profileUpdate(allData.name, photo);
+      toast("Your Sign Up is successful");
+      navigate("/");
+    } else {
+      toast("Failed to upload photo");
+    }
   };
   return (
     <div className="lg:px-28 px-5 py-10">
@@ -87,7 +106,7 @@ const SignUp = () => {
             : "divide-teal-600"
         }`}
       >
-        <div className="lg:w-[60%] sticky top-0">
+        <div className="hidden lg:flex lg:w-[60%] sticky top-0">
           <Lottie className=" sticky top-5" animationData={anim}></Lottie>
         </div>
         <div className="lg:w-[40%] pl-5 space-y-8">
@@ -157,9 +176,9 @@ const SignUp = () => {
                 <option defaultValue={null} hidden>
                   Select your Gender
                 </option>
-                <option value="male">Male</option>
-                <option value="female">Female</option>
-                <option value="other">Other</option>
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+                <option value="Custom">Other</option>
               </select>
             </div>
             <div className="space-y-2">
@@ -187,7 +206,7 @@ const SignUp = () => {
           <p>
             Have an account?{" "}
             <Link to="/login" className="text-teal-600">
-              Sign up
+              Sign in
             </Link>
           </p>
         </div>

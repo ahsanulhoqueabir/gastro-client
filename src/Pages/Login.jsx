@@ -9,10 +9,11 @@ import { authContext } from "../ContextProvider/AuthProvider";
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 import RouteTitle from "../utilities/RouteTitle";
-import { router } from "../Router/Router";
 import { useLocation, useNavigate } from "react-router-dom";
+import useAxiosPublic from "../Hooks/useAxiosPublic";
 const Login = () => {
   RouteTitle("Login");
+  const axiosPublic = useAxiosPublic();
   const location = useLocation();
   const navigate = useNavigate();
   const { from } = location.state || { from: { pathname: "/" } };
@@ -21,21 +22,21 @@ const Login = () => {
   const {
     register,
     handleSubmit,
-    watch,
     formState: { errors },
   } = useForm();
   const onSubmit = (data) => {
     emailPasswordSignIn(data.email, data.password)
       .then((res) => {
         toast("Successfully Log in");
+
         navigate(from, { replace: true });
       })
       .catch((err) => toast(err.message));
   };
   return (
     <div className="lg:px-28 px-5">
-      <section className="lg:flex  gap-10 lg:justify-center lg:items-center divide-x-4 divide-teal-600 ">
-        <div className="lg:w-[60%]">
+      <section className="lg:flex  gap-10 lg:justify-center lg:items-center divide-x-4 divide-teal-600 py-20 lg:py-2">
+        <div className="hidden lg:block  lg:w-[60%]">
           <Lottie animationData={anim}></Lottie>
         </div>
         <div className="lg:w-[40%] pl-5 space-y-8">

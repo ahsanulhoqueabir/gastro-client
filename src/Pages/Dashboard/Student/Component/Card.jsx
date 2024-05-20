@@ -4,13 +4,12 @@ import { Link } from "react-router-dom";
 import { authContext } from "../../../../ContextProvider/AuthProvider";
 import Swal from "sweetalert2";
 import useUserData from "../../../../Hooks/useUserData";
+import Payment from "../../Payment/Payment";
 
 const Card = ({ i }) => {
-  const [, , refetch, ,] = useUserData();
-  const { user } = useContext(authContext);
+  const [info, , refetch, ,] = useUserData();
   const handleDelete = () => {
-    // console.log(i._id);
-    const url = `http://localhost:3000/deleteSelectedClass/${user?.email}/${i._id}`;
+    const url = `http://localhost:5000/api/v1/users/RemoveClass?id=${info._id}&course=${i._id}`;
     Swal.fire({
       title: "Want to Remove this Class?",
       icon: "warning",
@@ -30,16 +29,17 @@ const Card = ({ i }) => {
       }
     });
   };
+  const handlePayment = () => {};
   return (
     <tr className="">
       <td className="w-fit">
-        <img src={i.classimage} alt="class" className="w-28 h-20 rounded-lg" />
+        <img src={i.classImage} alt="class" className="w-28 h-20 rounded-lg" />
       </td>
       <td className="pl-3">
         <div className=" flex-col justify-between">
-          <h1 className="text-lg font-semibold">{i.classname}</h1>
+          <h1 className="text-lg font-semibold">{i.className}</h1>
           <h1>
-            <small>by</small> <span>{i.classinstructor}</span>
+            <small>by</small> <span>{i.instructor}</span>
           </h1>
         </div>
       </td>
@@ -50,6 +50,7 @@ const Card = ({ i }) => {
               <FaTrashAlt />
             </button>
           </div>
+
           <div>
             <Link to={`/dashboard/payment/${i._id}`}>
               <button className="px-4 rounded-lg text-white py-0.5 bg-green-400">

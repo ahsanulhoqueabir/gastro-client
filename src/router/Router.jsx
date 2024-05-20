@@ -19,16 +19,28 @@ import ManageUser from "../Pages/Dashboard/Admin/ManageUser/ManageUser";
 import InstructorRoute from "./InstructorRoute";
 import AdminAccess from "./AdminAccess";
 import Profile from "../Pages/Dashboard/Profile/Profile";
+import PaymentHistory from "../Pages/Dashboard/Student/PaymentHistory";
+import ClassesInstrutor from "../Pages/Instructors/ClassesInstrutor";
+import LoadingPage from "../Components/Loader/LoadingPage";
+import UpdateClass from "../Pages/Dashboard/Instructor/UpdateClass";
 
 export const router = createBrowserRouter([
   {
     path: "/",
     element: <App />,
     children: [
+      {
+        path: "error",
+        element: <ErrorPage />,
+      },
       { path: "/", element: <Home /> },
       {
         path: "instructors",
         element: <Instructors />,
+      },
+      {
+        path: "/classes/:id",
+        element: <ClassesInstrutor />,
       },
       {
         path: "Classes",
@@ -71,6 +83,10 @@ export const router = createBrowserRouter([
             path: "Payment/:id",
             element: <Payment />,
           },
+          {
+            path: "history",
+            element: <PaymentHistory />,
+          },
           // instructor route ---------------
           {
             path: "addNewClass",
@@ -87,6 +103,10 @@ export const router = createBrowserRouter([
                 <MyClass />
               </InstructorRoute>
             ),
+          },
+          {
+            path: "updateclass/:id",
+            element: <UpdateClass />,
           },
 
           // admin routes -------------------
@@ -107,6 +127,10 @@ export const router = createBrowserRouter([
             ),
           },
         ],
+      },
+      {
+        path: "/loader",
+        element: <LoadingPage />,
       },
     ],
   },

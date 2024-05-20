@@ -4,19 +4,17 @@ import axios from "axios";
 import useAuth from "./useAuth";
 
 const axiosPublic = axios.create({
-  baseURL: "http://localhost:3000",
+  baseURL: "http://localhost:5000/api/v1",
 });
 
 const useAxiosPublic = () => {
   const navigate = useNavigate();
-  const { logout } = useAuth();
 
   const handleResponseError = async (error) => {
     const status = error.response?.status;
 
-    if (status === 401 || status === 403) {
-      await logout();
-      navigate("/login");
+    if (status === 401 || status === 403 || status === 500) {
+      navigate("/error");
     }
     return Promise.reject(error);
   };

@@ -6,8 +6,12 @@ import { useLocation, useNavigate } from "react-router-dom";
 import useUserRole from "../../Hooks/useUserRole";
 import Swal from "sweetalert2";
 import { toast } from "react-toastify";
+import useUserData from "../../Hooks/useUserData";
+import useAxiosPublic from "../../Hooks/useAxiosPublic";
 const ClassCard = ({ item }) => {
   const { user } = useContext(authContext);
+  const axiosPublic = useAxiosPublic();
+  const [info] = useUserData();
   let userRole;
   if (user) {
     userRole = useUserRole();
@@ -16,7 +20,7 @@ const ClassCard = ({ item }) => {
   const navigate = useNavigate();
 
   const isDisabled = () => {
-    if (item.availableseats === 0) {
+    if (item.seatsAvailable === 0) {
       return true;
     } else if (user && (userRole === "admin" || userRole === "instructor")) {
       return true;
@@ -25,7 +29,7 @@ const ClassCard = ({ item }) => {
     }
   };
   const redBG = () => {
-    if (item.availableseats === 0) {
+    if (item.seatsAvailable === 0) {
       return "bg-red-600 text-white";
     }
   };
@@ -54,19 +58,27 @@ const ClassCard = ({ item }) => {
         confirmButtonText: "Yes",
       }).then((result) => {
         if (result.isConfirmed) {
-          const url = `http://localhost:3000/addSelectedClass/${user.email}`;
-          fetch(url, {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify(item),
-          })
-            .then((res) => res.json())
-            .then((data) => {
-              if (data) {
-                toast.success("Class Selected Successfully");
-              }
+          const url = `/users/addSelectedClass?id=${info._id}&course=${item._id}`;
+          // fetch(url, {
+          //   method: "PUT",
+          //   headers: {
+          //     "Content-Type": "application/json",
+          //   },
+          //   body: JSON.stringify(item),
+          // })
+          //   .then((res) => res.json())
+          //   .then((data) => {
+          //     if (data) {
+          //       toast.success("Class Selected Successfully");
+          //     }
+          //   });
+          axiosPublic
+            .put(url)
+            .then((res) => {
+              toast.success("Class Selected Successfully");
+            })
+            .catch((err) => {
+              console.log(err);
             });
         }
       });
@@ -79,23 +91,23 @@ const ClassCard = ({ item }) => {
       className={` p-5 rounded-lg shadow-md shadow-teal-300 ${redBG()}`}
     >
       <img
-        src={item.classimage}
-        alt={item.classname}
-        className="w-full h-48 object-cover rounded-lg"
+        src={item.classImage}
+        alt={item.className}
+        className="w-full h-48 object-cover rounded-lg border-2 p-2 border-teal-100"
       />
-      <h1 className="text-xl font-semibold">{item.classname}</h1>
+      <h1 className="text-xl font-semibold">{item.className}</h1>
       <p className="font-bold">
         <small>by </small>
-        {item.classinstructor}
+        {item.user?.name || item.instructor}
       </p>
       <p>
         Available Seats:{" "}
-        <span className="font-bold">{item.availableseats}</span>
+        <span className="font-bold">{item.seatsAvailable}</span>
       </p>
       <p className="flex">
         Price:{" "}
         <span className="font-bold flex items-center">
-          {item.price} <FaBangladeshiTakaSign className="text-green-700" />
+          {item.classPrice} <FaBangladeshiTakaSign className="text-green-700" />
         </span>
       </p>
       <Explore className="mt-5" onClick={handleEnroll} disabled={isDisabled()}>

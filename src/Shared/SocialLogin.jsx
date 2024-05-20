@@ -18,10 +18,9 @@ const SocialLogin = () => {
           name: res.user.displayName,
           email: res.user.email,
           photo: res.user.photoURL,
-          role: "student",
         };
-        fetch("http://localhost:3000/users", {
-          method: "POST",
+        fetch("http://localhost:5000/api/v1/users/add", {
+          method: "PUT",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(data),
         });

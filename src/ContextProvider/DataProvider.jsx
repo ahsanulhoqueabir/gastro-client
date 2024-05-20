@@ -8,10 +8,11 @@ const DataProvider = ({ children }) => {
   const [instructors, setInstructors] = useState([]);
   let [userInfo, setInfo] = useState();
   useEffect(() => {
-    fetch("http://localhost:3000/instructors")
+    fetch("http://localhost:5000/api/v1/users/instructor")
       .then((res) => res.json())
       .then((data) => setInstructors(data));
   }, []);
+
   const allData = {
     userInfo,
     instructors,

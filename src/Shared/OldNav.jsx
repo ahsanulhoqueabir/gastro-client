@@ -58,9 +58,9 @@ const Navbar = () => {
     return <LoadingNavbar />;
   }
   return (
-    <div className="navbar bg-base-200 lg:px-20">
+    <div className="navbar px-5 bg-base-200 lg:px-20">
       <div className="navbar-start">
-        <div className="dropdown">
+        {/* <div className="dropdown">
           <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -83,7 +83,7 @@ const Navbar = () => {
           >
             {fields}
           </ul>
-        </div>
+        </div> */}
 
         <Link to="/">
           <div className="flex items-center gap-2">
@@ -99,26 +99,23 @@ const Navbar = () => {
       <div className="navbar-center hidden lg:flex">
         <ul className="menu menu-horizontal px-1 gap-3">{fields}</ul>
       </div>
-      <div className="navbar-end">
+      <div className="navbar-end pr-2">
         {user ? (
           <div className="dropdown dropdown-end">
             <div
-              tabIndex={0}
-              role="button"
-              className="btn btn-ghost btn-circle avatar"
+              className="w-10 rounded-full tooltip tooltip-left "
+              data-tip={user.displayName}
             >
-              <div className="w-10 rounded-full">
-                <img alt={user.displayName} src={user.photoURL} />
-              </div>
+              <img
+                className="rounded-full"
+                alt={user.displayName}
+                src={
+                  user.photoURL
+                    ? user.photoURL
+                    : "https://placehold.co/500x500/teal/orange.png?text=User+Image"
+                }
+              />
             </div>
-            <ul
-              tabIndex={0}
-              className="mt-3 z-[1] p-2 shadow menu menu-sm dropdown-content bg-base-100 rounded-box w-52"
-            >
-              <li>
-                <p onClick={logout}>Logout</p>
-              </li>
-            </ul>
           </div>
         ) : (
           <Link

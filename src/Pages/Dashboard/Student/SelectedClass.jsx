@@ -2,12 +2,12 @@ import React, { useContext } from "react";
 import PageBanner from "../../../Components/PageBanner";
 import Card from "./Component/Card";
 import useUserData from "../../../Hooks/useUserData";
+import EmptyItems from "../../../Components/Loader/EmptyItems";
 
 const SelectedClass = () => {
-  const [info, infoLoading, refetch, selectedClass, enrolledClass] =
-    useUserData();
+  let [info, infoLoading, refetch] = useUserData();
 
-  const l = selectedClass?.length;
+  const l = info?.selected.length;
   return (
     <>
       <PageBanner>My Selected Class</PageBanner>
@@ -20,16 +20,14 @@ const SelectedClass = () => {
           <div className="flex justify-center">
             <table className="">
               <tbody>
-                {selectedClass.map((i) => (
-                  <Card i={i} key={i._id} />
+                {info.selected.map((i, ind) => (
+                  <Card i={i} key={ind} />
                 ))}
               </tbody>
             </table>
           </div>
         ) : (
-          <p className="text-center mx-auto">
-            You Have not added any course in cart yet!
-          </p>
+          <EmptyItems message={"You  haven't selected any class yet"} />
         )}
       </div>
     </>

@@ -3,6 +3,7 @@ import useThemeControl from "../Hooks/ThemeControl";
 import logo from "../assets/favicon.png";
 import {
   FaArrowRightToBracket,
+  FaBars,
   FaChalkboardUser,
   FaCheckToSlot,
   FaLaptopMedical,
@@ -14,7 +15,13 @@ import {
 import LoadingNavbar from "./LoadingNavbar";
 import useAuth from "../Hooks/useAuth";
 import useUserRole from "../Hooks/useUserRole";
-import { FaChalkboardTeacher, FaHome, FaUsersCog } from "react-icons/fa";
+import {
+  FaChalkboardTeacher,
+  FaHome,
+  FaTh,
+  FaTimes,
+  FaUsersCog,
+} from "react-icons/fa";
 
 const Navbar = () => {
   const [theme, handleToggle] = useThemeControl();
@@ -68,7 +75,7 @@ const Navbar = () => {
       {role === "student" && (
         <>
           <Link
-            to="selectedclass"
+            to="dashboard/selectedclass"
             className="flex  hover:bg-indigo-100   items-center justify-center gap-1 rounded-md   "
           >
             <FaCheckToSlot />
@@ -77,7 +84,7 @@ const Navbar = () => {
           </Link>
 
           <Link
-            to={"Enrolled"}
+            to={"dashboard/Enrolled"}
             className="flex  hover:bg-indigo-100   items-center justify-center gap-1 rounded-md   "
           >
             <FaChalkboardUser />
@@ -89,7 +96,7 @@ const Navbar = () => {
       {role === "instructor" && (
         <>
           <Link
-            to={"addNewClass"}
+            to={"dashboard/addNewClass"}
             className="flex  hover:bg-indigo-100   items-center justify-center gap-1 rounded-md   "
           >
             {/* <FaMoneyCheck /> */}
@@ -98,7 +105,7 @@ const Navbar = () => {
             <small className="">Add New </small>
           </Link>
           <Link
-            to="myclass"
+            to="dashboard/myclass"
             className="flex  hover:bg-indigo-100   items-center justify-center gap-1 rounded-md   "
           >
             <FaCheckToSlot />
@@ -110,7 +117,7 @@ const Navbar = () => {
       {role === "admin" && (
         <>
           <Link
-            to="manageclasses"
+            to="dashboard/manageclasses"
             className="flex  hover:bg-indigo-100   items-center justify-center gap-1 rounded-md   "
           >
             <FaPuzzlePiece />
@@ -118,7 +125,7 @@ const Navbar = () => {
             <small className=""> Manage Class </small>
           </Link>
           <Link
-            to="manageuser"
+            to="dashboard/manageuser"
             className="flex  hover:bg-indigo-100   items-center justify-center gap-1 rounded-md   "
           >
             <FaUsersCog />
@@ -142,6 +149,9 @@ const Navbar = () => {
   if (authLoading) {
     return <LoadingNavbar />;
   }
+  const handleClose = () => {
+    document.getElementById("my-drawer").checked = false;
+  };
   return (
     <div className="navbar bg-base-200 lg:px-20">
       <div className="navbar-start justify-start">
@@ -152,20 +162,8 @@ const Navbar = () => {
               htmlFor="my-drawer"
               className=" cursor-pointer drawer-button"
             >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="lg:size-10 size-6 rounded-full p-2 border-2 border-teal-500 text-green-700"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  d="M4 6h16M4 12h8m-8 6h16"
-                />
-              </svg>
+              {/* <FaBars className="text-3xl" /> */}
+              <FaTh className="text-3xl" />
             </label>
           </div>
           <div className="drawer-side z-50">
@@ -175,6 +173,11 @@ const Navbar = () => {
               className="drawer-overlay"
             ></label>
             <ul className="menu p-4 w-fit  min-h-full bg-white text-black lg:text-2xl gap-3">
+              <div className="flex justify-end">
+                <button onClick={handleClose}>
+                  <FaTimes className="text-3xl font-thin" />
+                </button>
+              </div>
               {fields}
             </ul>
           </div>

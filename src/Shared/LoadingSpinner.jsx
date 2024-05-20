@@ -3,7 +3,7 @@ import React from "react";
 const LoadingSpinner = () => {
   return (
     <div className="flex">
-      <div className="flex mx-auto mt-36 ">
+      <div className="flex mx-auto  ">
         <div className="w-10 h-10">
           <div className="grid grid-cols-2 justify-center items-center gap-2 rounded-full">
             <span className="h-5 w-5 rounded-tl-full bg-blue-500 animate-[ping_1.4s_linear_infinite]"></span>{" "}

@@ -1,3 +1,4 @@
+import BottomNav from "../Components/BottomNav";
 import Navbar from "../Shared/Navbar";
 import { Outlet } from "react-router-dom";
 
@@ -6,6 +7,7 @@ const Basic = () => {
     <div>
       <Navbar />
       <Outlet />
+      <BottomNav />
     </div>
   );
 };

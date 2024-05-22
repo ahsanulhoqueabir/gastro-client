@@ -13,6 +13,7 @@ const UserCard = ({ user }) => {
   const [axiosSecure] = useAxiosSecure();
   const handleAdmin = () => {
     axiosSecure.put(`/users/updaterole?email=${user?.email}&role=admin`);
+
     setIsAdminDisabled(!isAdminDisabled);
     setIsInstructorDisabled(false);
     toast.success("User role updated to Admin");

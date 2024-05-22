@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
-import useAllUser from "../../../../Hooks/useAllUser";
 import LoadingSpinner from "../../../../Shared/LoadingSpinner";
 import PageBanner from "../../../../Components/PageBanner";
 import { FaUserSecret, FaUserShield } from "react-icons/fa6";
 import UserCard from "./UserCard";
 import useAxiosSecure from "../../../../Hooks/useAxiosSecure";
+import LoadingPage from "../../../../Components/Loader/LoadingPage";
 
 const ManageUser = () => {
   // const [allUser, allUserLoading, refetch] = useAllUser();
@@ -13,20 +13,19 @@ const ManageUser = () => {
   const [axiosSecure] = useAxiosSecure();
   useEffect(() => {
     axiosSecure.get("/users/alluser").then((res) => {
-      console.log("Users: ", res.data);
       setUser(res.data);
       setAllUserLoading(false);
     });
   }, []);
   if (allUserLoading) {
-    return <LoadingSpinner />;
+    return <LoadingPage />;
   }
 
   return (
     <>
       <PageBanner>Manage User</PageBanner>
       <section className="px-5 lg:px-20 py-10 ">
-        <div className="flex lg:w-2/3 overflow-x-auto  mx-auto ">
+        <div className="flex lg:px-10 overflow-x-auto  mx-auto ">
           <table className="table">
             <thead>
               <tr>

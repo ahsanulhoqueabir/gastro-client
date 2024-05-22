@@ -3,6 +3,8 @@ import PageBanner from "../../../Components/PageBanner";
 import useUserData from "../../../Hooks/useUserData";
 import LoadingPage from "../../../Components/Loader/LoadingPage";
 import InstructorProfile from "./InstructorProfile";
+import AdminProfile from "./AdminProfile";
+import StudentProfile from "./StudentProfile";
 const Profile = () => {
   const [info, infoLoading, refetch] = useUserData();
   if (infoLoading) {
@@ -13,7 +15,7 @@ const Profile = () => {
       <div className="">
         <PageBanner>My profile</PageBanner>
       </div>
-      <section className="px-5 py-10">
+      <section className="px-1 lg:px-5 py-10">
         <div>
           <div className=" grid grid-cols-1 justify-between lg:grid-cols-3 gap-5 text-black">
             <div className="stat w-fit bg-blue-200 rounded-xl">
@@ -42,7 +44,15 @@ const Profile = () => {
                 </div>
               </div>
             </div>
-            <InstructorProfile />
+            {/* <InstructorProfile /> */}
+            {/* <AdminProfile /> */}
+            {info.role === "admin" ? (
+              <AdminProfile />
+            ) : info.role === "instructor" ? (
+              <InstructorProfile />
+            ) : (
+              <StudentProfile />
+            )}
           </div>
         </div>
       </section>

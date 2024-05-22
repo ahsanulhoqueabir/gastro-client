@@ -5,23 +5,21 @@ import {
   FaRegTimesCircle,
 } from "react-icons/fa";
 import useAxiosSecure from "../../../../Hooks/useAxiosSecure";
-import useClasses from "../../../../Hooks/useClasses";
 import Swal from "sweetalert2";
 import { toast } from "react-toastify";
 
 const ClassCard = ({ data }) => {
   const [isDisabled, setDisabled] = useState(false);
   const [axiosSecure] = useAxiosSecure();
-  const [, , refetch] = useClasses();
   const {
     _id,
-    classname,
-    classinstructor,
+    className,
+    instructor,
     instructormail,
-    availableseats,
+    seatsAvailable,
     approveStatus,
-    classimage,
-    price,
+    classImage,
+    classPrice,
   } = data;
   useEffect(() => {
     if (approveStatus === "pending") {
@@ -32,15 +30,13 @@ const ClassCard = ({ data }) => {
   }, [approveStatus]);
   const handleApprove = () => {
     setDisabled(true);
-    axiosSecure.put(`/updateClass/${_id}`, { approveStatus: "approved" });
+    axiosSecure.put(`/courses/update?id=${_id}`, { approveStatus: "approved" });
     toast.success("Class Approved");
-    refetch();
   };
   const handleDeny = () => {
     setDisabled(true);
-    axiosSecure.put(`/updateClass/${_id}`, { approveStatus: "denied" });
+    axiosSecure.put(`/courses/update?id=${_id}`, { approveStatus: "denied" });
     toast.error("Class Denied");
-    refetch();
   };
   const handleFeedback = async () => {
     const { value: text } = await Swal.fire({
@@ -56,9 +52,8 @@ const ClassCard = ({ data }) => {
       showCloseButton: true,
     });
     if (text) {
-      axiosSecure.put(`/updateClass/${_id}`, { feedback: text });
+      axiosSecure.put(`/courses/update?id=${_id}`, { feedback: text });
       toast.success("Feedback Sent");
-      refetch();
     } else {
       toast.error("Feedback cannot be empty!");
     }
@@ -68,7 +63,7 @@ const ClassCard = ({ data }) => {
       <td>
         <div>
           <img
-            src={classimage}
+            src={classImage}
             className="w-12 h-10   object-cover lg:w-36 lg:h-24 rounded-md"
             alt="Class Image"
           />
@@ -77,12 +72,12 @@ const ClassCard = ({ data }) => {
       <td>
         <div>
           <p>
-            <span className="font-medium">{classname}</span>
+            <span className="font-medium">{className}</span>
           </p>
           <p>
             {" "}
             <span className="text-xs">by</span>
-            {`  ${classinstructor}`}
+            {`  ${instructor}`}
           </p>
           <p>
             <span className="text-xs">Email:</span>
@@ -94,11 +89,11 @@ const ClassCard = ({ data }) => {
         <div className="text-sm lg:text-lg flex-col justify-between">
           <p>
             <span className="font-bold">Availabe Seats: </span>
-            <span>{availableseats}</span>
+            <span>{seatsAvailable}</span>
           </p>
           <p>
             <span className="font-bold">Price: </span>
-            <span>{price}</span>
+            <span>{classPrice}</span>
           </p>
           <p>
             <span>Status: </span>
@@ -123,7 +118,7 @@ const ClassCard = ({ data }) => {
               <FaRegCheckCircle className="text-green-700" />
             </button>
           </div>
-          <div className="tooltip" data-tip="Don't Approve">
+          <div className="tooltip" data-tip="Deny">
             <button onClick={handleDeny} className="" disabled={isDisabled}>
               <FaRegTimesCircle className="text-red-700" />
             </button>

@@ -6,8 +6,10 @@ import useUserData from "../../../Hooks/useUserData";
 import useAxiosSecure from "../../../Hooks/useAxiosSecure";
 import Swal from "sweetalert2";
 import PageBanner from "../../../Components/PageBanner";
+import RouteTitle from "../../../utilities/RouteTitle";
 
 const AddClass = () => {
+  RouteTitle("Add Class");
   const [info] = useUserData();
   const [axiosSecure] = useAxiosSecure();
   const {

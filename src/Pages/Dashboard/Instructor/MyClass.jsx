@@ -2,9 +2,11 @@ import PageBanner from "../../../Components/PageBanner";
 import LoadingSpinner from "../../../Shared/LoadingSpinner";
 import Card from "./Card";
 import useUserData from "../../../Hooks/useUserData";
+import RouteTitle from "../../../utilities/RouteTitle";
 
 const MyClass = () => {
   const [info, infoLoading, refetch] = useUserData();
+  RouteTitle("My Classes");
 
   if (infoLoading) {
     return <LoadingSpinner />;

@@ -3,8 +3,10 @@ import PageBanner from "../../../Components/PageBanner";
 import ClassCard from "./Component/ClassCard";
 import useAxiosSecure from "../../../Hooks/useAxiosSecure";
 import LoadingPage from "../../../Components/Loader/LoadingPage";
+import RouteTitle from "../../../utilities/RouteTitle";
 
 const ManageClasses = () => {
+  RouteTitle("Manage Classes");
   const [axiosSecure] = useAxiosSecure();
   const [classes, setClasses] = useState([]);
   const [loading, setLoading] = useState(true);

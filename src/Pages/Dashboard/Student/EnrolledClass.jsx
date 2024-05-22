@@ -2,10 +2,12 @@ import useSelected from "../../../Hooks/useUserData";
 import PageBanner from "../../../Components/PageBanner";
 import CardEn from "./Component/CardEn";
 import EmptyItems from "../../../Components/Loader/EmptyItems";
+import RouteTitle from "../../../utilities/RouteTitle";
 
 const EnrolledClass = () => {
   const [info, infoLoading, refetch, , enrolledClass] = useSelected();
   const l = info?.enrolled?.length;
+  RouteTitle("Enrolled Classes");
 
   return (
     <>

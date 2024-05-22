@@ -5,7 +5,9 @@ import LoadingPage from "../../../Components/Loader/LoadingPage";
 import InstructorProfile from "./InstructorProfile";
 import AdminProfile from "./AdminProfile";
 import StudentProfile from "./StudentProfile";
+import RouteTitle from "../../../utilities/RouteTitle";
 const Profile = () => {
+  RouteTitle("Profile");
   const [info, infoLoading, refetch] = useUserData();
   if (infoLoading) {
     return <LoadingPage />;

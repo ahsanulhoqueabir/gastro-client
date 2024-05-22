@@ -1,13 +1,12 @@
 import React, { useEffect, useState } from "react";
-import LoadingSpinner from "../../../../Shared/LoadingSpinner";
 import PageBanner from "../../../../Components/PageBanner";
-import { FaUserSecret, FaUserShield } from "react-icons/fa6";
 import UserCard from "./UserCard";
 import useAxiosSecure from "../../../../Hooks/useAxiosSecure";
 import LoadingPage from "../../../../Components/Loader/LoadingPage";
+import RouteTitle from "../../../../utilities/RouteTitle";
 
 const ManageUser = () => {
-  // const [allUser, allUserLoading, refetch] = useAllUser();
+  RouteTitle("Manage Users");
   const [allUser, setUser] = useState([]);
   const [allUserLoading, setAllUserLoading] = useState(true);
   const [axiosSecure] = useAxiosSecure();

@@ -2,10 +2,12 @@ import React from "react";
 import { useLocation, useParams } from "react-router-dom";
 import PageBanner from "../../Components/PageBanner";
 import ClassCard from "../Classes/ClassCard";
+import RouteTitle from "../../utilities/RouteTitle";
 
 const ClassesInstrutor = () => {
   const location = useLocation();
   const { instructor, courses } = location?.state;
+  RouteTitle(instructor);
   return (
     <>
       <PageBanner>Classes of {instructor}</PageBanner>

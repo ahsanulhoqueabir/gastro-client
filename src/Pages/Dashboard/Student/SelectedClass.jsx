@@ -1,22 +1,23 @@
-import React, { useContext } from "react";
 import PageBanner from "../../../Components/PageBanner";
 import Card from "./Component/Card";
 import useUserData from "../../../Hooks/useUserData";
 import EmptyItems from "../../../Components/Loader/EmptyItems";
+import RouteTitle from "../../../utilities/RouteTitle";
+import LoadingPage from "../../../Components/Loader/LoadingPage";
 
 const SelectedClass = () => {
   let [info, infoLoading, refetch] = useUserData();
+  RouteTitle("Selected Classes");
 
-  const l = info?.selected.length;
+  const l = info?.selected?.length;
+  if (infoLoading) {
+    return <LoadingPage />;
+  }
   return (
     <>
       <PageBanner>My Selected Class</PageBanner>
       <div className="px-5 lg:px-24 py-10">
-        {infoLoading ? (
-          <div className="flex justify-center items-center">
-            <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-gray-900"></div>
-          </div>
-        ) : l > 0 ? (
+        {l > 0 ? (
           <div className="flex justify-center">
             <table className="">
               <tbody>

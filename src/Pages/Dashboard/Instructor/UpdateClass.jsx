@@ -6,8 +6,10 @@ import useUserData from "../../../Hooks/useUserData";
 import Button from "../../../Components/Button/Button";
 import useAxiosSecure from "../../../Hooks/useAxiosSecure";
 import { toast } from "react-toastify";
+import RouteTitle from "../../../utilities/RouteTitle";
 
 const UpdateClass = () => {
+  RouteTitle("Update Class");
   const [info, infoLoading] = useUserData();
   const [axiosSecure] = useAxiosSecure();
   const {

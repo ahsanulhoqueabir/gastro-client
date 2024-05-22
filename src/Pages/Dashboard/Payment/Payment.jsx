@@ -7,12 +7,14 @@ import useUserData from "../../../Hooks/useUserData";
 import { useState } from "react";
 import { useEffect } from "react";
 import useAxiosPublic from "../../../Hooks/useAxiosPublic";
+import RouteTitle from "../../../utilities/RouteTitle";
 const stripePromise = loadStripe(import.meta.env.VITE_Payment_GateWay_PK);
 const Payment = () => {
   const [info, , refetch, selectedClass] = useUserData();
   const axiosPublic = useAxiosPublic();
   const { id } = useParams();
   const [myClass, setMyClass] = useState({});
+  RouteTitle("Complete Payment");
   useEffect(() => {
     if (id) {
       axiosPublic.get(`/courses/query?id=${id}`).then((res) => {

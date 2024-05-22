@@ -3,8 +3,10 @@ import useAxiosSecure from "../../../Hooks/useAxiosSecure";
 import useUserData from "../../../Hooks/useUserData";
 import PageBanner from "../../../Components/PageBanner";
 import LoadingPage from "../../../Components/Loader/LoadingPage";
+import RouteTitle from "../../../utilities/RouteTitle";
 
 const PaymentHistory = () => {
+  RouteTitle("Payment History");
   const [loading, setLoading] = useState(true);
   const [info, infoLoading] = useUserData();
   const [axiosSecure] = useAxiosSecure();
@@ -16,7 +18,7 @@ const PaymentHistory = () => {
     });
   }, []);
 
-  if (loading || infoLoading) { 
+  if (loading || infoLoading) {
     return <LoadingPage />;
   }
 

@@ -23,6 +23,7 @@ import PaymentHistory from "../Pages/Dashboard/Student/PaymentHistory";
 import ClassesInstrutor from "../Pages/Instructors/ClassesInstrutor";
 import LoadingPage from "../Components/Loader/LoadingPage";
 import UpdateClass from "../Pages/Dashboard/Instructor/UpdateClass";
+import PrivacyPolicy from "../Pages/PrivacyPolicy";
 
 export const router = createBrowserRouter([
   {
@@ -127,6 +128,10 @@ export const router = createBrowserRouter([
             ),
           },
         ],
+      },
+      {
+        path: "policy",
+        element: <PrivacyPolicy />,
       },
       {
         path: "/loader",

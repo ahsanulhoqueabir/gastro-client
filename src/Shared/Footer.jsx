@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import logo from "../../src/assets/favicon.png";
 import { FaFacebook, FaInstagram, FaYoutube } from "react-icons/fa6";
 const Footer = () => {
@@ -64,8 +65,14 @@ const Footer = () => {
             <div>
               <p className="font-medium">Legal</p>
               <nav className="flex flex-col mt-4 space-y-2 text-sm text-gray-500">
-                <a className="hover:opacity-75"> Privacy Policy </a>
-                <a className="hover:opacity-75"> Terms &amp; Conditions </a>
+                <Link to="/policy" className="hover:opacity-75">
+                  {" "}
+                  Privacy Policy{" "}
+                </Link>
+                <Link to="/terms" className="hover:opacity-75">
+                  {" "}
+                  Terms &amp; Conditions{" "}
+                </Link>
                 <a className="hover:opacity-75"> Returns Policy </a>
               </nav>
             </div>

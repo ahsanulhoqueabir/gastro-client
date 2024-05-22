@@ -24,6 +24,7 @@ import ClassesInstrutor from "../Pages/Instructors/ClassesInstrutor";
 import LoadingPage from "../Components/Loader/LoadingPage";
 import UpdateClass from "../Pages/Dashboard/Instructor/UpdateClass";
 import PrivacyPolicy from "../Pages/PrivacyPolicy";
+import TermsCondition from "../Pages/TermsCondition";
 
 export const router = createBrowserRouter([
   {
@@ -132,6 +133,10 @@ export const router = createBrowserRouter([
       {
         path: "policy",
         element: <PrivacyPolicy />,
+      },
+      {
+        path: "terms",
+        element: <TermsCondition />,
       },
       {
         path: "/loader",

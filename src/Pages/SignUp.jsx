@@ -63,11 +63,14 @@ const SignUp = () => {
   const handleUserCreate = async (email, password, name, photo) => {
     signUpewithemail(email, password)
       .then((res) => {
-        fetch("http://localhost:5000/api/v1/users/create", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(allData),
-        });
+        fetch(
+          "https://server-gastronomix.netlify.app/.netlify/functions/api/v1/users/create",
+          {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(allData),
+          }
+        );
         profileUpdate(name, photo);
         toast("Your Sign Up is successfull");
         navigate("/");
@@ -84,11 +87,14 @@ const SignUp = () => {
       await signUpewithemail(data.email, data.password);
       allData.photo = photo;
 
-      fetch("http://localhost:5000/api/v1/users/create", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(allData),
-      });
+      fetch(
+        "https://server-gastronomix.netlify.app/.netlify/functions/api/v1/users/create",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(allData),
+        }
+      );
 
       profileUpdate(allData.name, photo);
       toast("Your Sign Up is successful");

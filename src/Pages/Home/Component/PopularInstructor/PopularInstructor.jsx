@@ -4,6 +4,7 @@ import SectionTitle from "../../../../Components/SectionTitle";
 import LoadingSpinner from "../../../../Shared/LoadingSpinner";
 import InstructorCard from "./InstructorCard";
 import useAxiosPublic from "../../../../Hooks/useAxiosPublic";
+import { Link } from "react-router-dom";
 
 const PopularInstructor = () => {
   // const [instructors, instructorLoading] = useInstructor();
@@ -23,7 +24,7 @@ const PopularInstructor = () => {
   }, []);
 
   return (
-    <div>
+    <>
       <SectionTitle>Popular Instructors</SectionTitle>
       <section className="px-3 lg:px-10 py-10">
         {instructorLoading && (
@@ -35,13 +36,20 @@ const PopularInstructor = () => {
         )}
         {instructors?.length > 0 && (
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 ">
-            {instructors.slice(0, 6).map((instructor, idx) => (
+            {instructors?.slice(0, 6).map((instructor, idx) => (
               <InstructorCard key={idx} data={instructor} />
             ))}
           </div>
         )}
       </section>
-    </div>
+      <div className="flex  justify-center">
+        <Link to={"/instructors"}>
+          <button className="bg-teal-300 justify-center py-2 px-4 rounded-md">
+            View All Instructors
+          </button>
+        </Link>
+      </div>
+    </>
   );
 };
 

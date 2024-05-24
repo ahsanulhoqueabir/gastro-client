@@ -14,7 +14,7 @@ const useClasses = () => {
     queryKey: ["classes"],
     queryFn: async () => {
       const response = await fetch(
-        "http://localhost:5000/api/v1/courses/courses"
+        "https://server-gastronomix.netlify.app/.netlify/functions/api/v1/courses/courses"
       );
       return response.json();
     },

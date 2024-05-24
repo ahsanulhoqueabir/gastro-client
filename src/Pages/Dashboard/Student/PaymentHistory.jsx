@@ -28,7 +28,7 @@ const PaymentHistory = () => {
       <section>
         <div className=" py-10">
           <div className="grid grid-cols-1 lg:grid-cols-2 w-fit mx-auto gap-5 text-black">
-            {paymentHistory.map((payment) => (
+            {paymentHistory?.map((payment) => (
               <div
                 key={payment._id}
                 className="stat w-fit bg-blue-200 rounded-xl"

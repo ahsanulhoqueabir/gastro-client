@@ -9,7 +9,7 @@ import Payment from "../../Payment/Payment";
 const Card = ({ i }) => {
   const [info, , refetch, ,] = useUserData();
   const handleDelete = () => {
-    const url = `http://localhost:5000/api/v1/users/RemoveClass?id=${info._id}&course=${i._id}`;
+    const url = `https://server-gastronomix.netlify.app/.netlify/functions/api/v1/users/RemoveClass?id=${info._id}&course=${i._id}`;
     Swal.fire({
       title: "Want to Remove this Class?",
       icon: "warning",

@@ -4,6 +4,7 @@ import useClasses from "../../../../Hooks/useClasses";
 import LoadingSpinner from "../../../../Shared/LoadingSpinner";
 import PopularClassLoaderCard from "../../../../Components/Loader/PopularClassLoaderCard";
 import useAxiosPublic from "../../../../Hooks/useAxiosPublic";
+import { Link } from "react-router-dom";
 
 const PopularClass = () => {
   const AxiosPublic = useAxiosPublic();
@@ -30,7 +31,7 @@ const PopularClass = () => {
         {
           PopularClass?.length > 0 && (
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
-              {PopularClass.map((item, idx) => (
+              {PopularClass?.slice(0, 6).map((item, idx) => (
                 <div
                   key={idx}
                   className="bg-base-200 p-5 rounded-md space-y-2 shadow-teal-100 shadow-md"
@@ -59,6 +60,13 @@ const PopularClass = () => {
           // )}
         }
       </section>
+      <div className="flex  justify-center">
+        <Link to={"/classes"}>
+          <button className="bg-teal-300 justify-center py-2 px-4 rounded-md">
+            View All Classes
+          </button>
+        </Link>
+      </div>
     </>
   );
 };

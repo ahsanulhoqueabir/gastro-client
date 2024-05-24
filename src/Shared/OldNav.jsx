@@ -103,11 +103,11 @@ const Navbar = () => {
         {user ? (
           <div className="dropdown dropdown-end">
             <div
-              className="w-10 rounded-full tooltip tooltip-left "
+              className="rounded-full tooltip tooltip-left "
               data-tip={user.displayName}
             >
               <img
-                className="rounded-full"
+                className="rounded-full size-12 object-cover"
                 alt={user.displayName}
                 src={
                   user.photoURL

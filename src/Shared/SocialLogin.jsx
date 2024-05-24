@@ -19,11 +19,14 @@ const SocialLogin = () => {
           email: res.user.email,
           photo: res.user.photoURL,
         };
-        fetch("http://localhost:5000/api/v1/users/add", {
-          method: "PUT",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(data),
-        });
+        fetch(
+          "https://server-gastronomix.netlify.app/.netlify/functions/api/v1/users/add",
+          {
+            method: "PUT",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(data),
+          }
+        );
         navigate(from, { replace: true });
       })
       .catch((err) => toast(err.message));

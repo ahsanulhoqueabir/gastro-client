@@ -31,10 +31,6 @@ export const router = createBrowserRouter([
     path: "/",
     element: <App />,
     children: [
-      {
-        path: "error",
-        element: <ErrorPage />,
-      },
       { path: "/", element: <Home /> },
       {
         path: "instructors",
@@ -143,6 +139,10 @@ export const router = createBrowserRouter([
         element: <LoadingPage />,
       },
     ],
+  },
+  {
+    path: "error",
+    element: <ErrorPage />,
   },
   {
     path: "*",

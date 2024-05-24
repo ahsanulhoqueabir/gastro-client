@@ -62,9 +62,12 @@ const AuthProvider = ({ children }) => {
       }
       if (user) {
         axios
-          .post("http://localhost:5000/api/v1/verify/jwt", {
-            email: user?.email,
-          })
+          .post(
+            "https://server-gastronomix.netlify.app/.netlify/functions/api/v1/verify/jwt",
+            {
+              email: user?.email,
+            }
+          )
           .then((res) => {
             localStorage.setItem("access-token", res.data.token);
           });

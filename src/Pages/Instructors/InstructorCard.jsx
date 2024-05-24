@@ -32,7 +32,7 @@ const InstructorCard = ({ class: cls }) => {
         <DetailsButton
           onClick={() =>
             naviagte(`/classes/${_id}`, {
-              state: { instructor: name, courses: course },
+              state: { instructor: name, courses: course, id: _id },
             })
           }
         >

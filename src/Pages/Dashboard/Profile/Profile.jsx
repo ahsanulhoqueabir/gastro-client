@@ -20,7 +20,7 @@ const Profile = () => {
       <section className="px-1 lg:px-5 py-10">
         <div>
           <div className=" grid grid-cols-1 justify-between lg:grid-cols-3 gap-5 text-black">
-            <div className="stat w-fit bg-blue-200 rounded-xl">
+            <div className="stat h-46 w-fit bg-blue-200 rounded-xl">
               <div className="stat-figure ">
                 <div className="avatar online">
                   <div className="w-16 rounded-full">
@@ -46,8 +46,7 @@ const Profile = () => {
                 </div>
               </div>
             </div>
-            {/* <InstructorProfile /> */}
-            {/* <AdminProfile /> */}
+
             {info.role === "admin" ? (
               <AdminProfile />
             ) : info.role === "instructor" ? (

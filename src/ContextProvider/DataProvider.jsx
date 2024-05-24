@@ -8,7 +8,9 @@ const DataProvider = ({ children }) => {
   const [instructors, setInstructors] = useState([]);
   let [userInfo, setInfo] = useState();
   useEffect(() => {
-    fetch("http://localhost:5000/api/v1/users/instructor")
+    fetch(
+      "https://server-gastronomix.netlify.app/.netlify/functions/api/v1/users/instructor"
+    )
       .then((res) => res.json())
       .then((data) => setInstructors(data));
   }, []);

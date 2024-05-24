@@ -27,7 +27,7 @@ const PopularReviews = () => {
         <div className="flex gap-3">
           <div className="grid gap-3 w-full">
             {reviews?.slice(1, 3).map((review) => (
-              <ReviewCard review={review} />
+              <ReviewCard key={review._id} review={review} />
             ))}
           </div>
           <div className="my-10 w-full">
@@ -35,7 +35,7 @@ const PopularReviews = () => {
           </div>
           <div className="grid gap-3 w-full">
             {reviews?.slice(3, 5).map((review) => (
-              <ReviewCard review={review} />
+              <ReviewCard key={review._id} review={review} />
             ))}
           </div>
         </div>

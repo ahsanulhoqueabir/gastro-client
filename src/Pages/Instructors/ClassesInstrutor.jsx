@@ -1,7 +1,6 @@
 import React from "react";
-import { useLocation, useParams } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import PageBanner from "../../Components/PageBanner";
-import ClassCard from "../Classes/ClassCard";
 import RouteTitle from "../../utilities/RouteTitle";
 import EmptyItems from "../../Components/Loader/EmptyItems";
 import Card from "./Card";
@@ -34,7 +33,7 @@ const ClassesInstrutor = () => {
         <MyReviews id={id} />
         {info ? (
           info?.role === "admin" || info?.role === "instructor" ? (
-            ""
+            " "
           ) : (
             <Review instructor={id} />
           )

@@ -3,6 +3,7 @@ import useAxiosPublic from "../../Hooks/useAxiosPublic";
 import SectionTitle from "../../Components/SectionTitle";
 import { toast } from "react-toastify";
 import LoadingSpinner from "../../Shared/LoadingSpinner";
+import EmptyItems from "../../Components/Loader/EmptyItems";
 
 const MyReviews = ({ id }) => {
   const [reviews, setReviews] = useState([]);
@@ -25,12 +26,12 @@ const MyReviews = ({ id }) => {
       <SectionTitle>Reviews</SectionTitle>
       <section>
         {loading && <LoadingSpinner />}
-        {reviews?.length > 0 ? (
+        {reviews?.length > 0 && (
           <div className="grid gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 px-5 lg:px-20">
             {reviews?.map((review) => (
               <div
                 key={review._id}
-                className="flex flex-col gap-2 p-4 h-60 bg-blue-100 rounded-md text-black"
+                className="flex flex-col gap-2 p-4  bg-blue-100 rounded-md text-black"
               >
                 <div className="flex gap-3">
                   <img
@@ -83,9 +84,8 @@ const MyReviews = ({ id }) => {
               </div>
             ))}
           </div>
-        ) : (
-          <p>No Reviews Found!</p>
         )}
+        {reviews?.length === 0 && <EmptyItems message={"No Reviews"} />}
       </section>
     </div>
   );

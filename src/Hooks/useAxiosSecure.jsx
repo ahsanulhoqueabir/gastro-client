@@ -4,7 +4,7 @@ import axios from "axios";
 import useAuth from "./useAuth";
 
 const axiosSecure = axios.create({
-  // baseURL: "https://server-gastronomix.netlify.app/.netlify/functions/api/v1",
+  // baseURL: "http://localhost:5000/api/v1",
   baseURL: "https://server-gastronomix.netlify.app/.netlify/functions/api/v1",
 });
 const useAxiosSecure = () => {

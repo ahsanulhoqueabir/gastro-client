@@ -1,0 +1,87 @@
+[
+  {
+    "title": "What programs does the culinary academy offer?",
+    "description": "We offer a range of programs including Culinary Arts, Baking and Pastry Arts, Hospitality Management, and specialized short courses like International Cuisine, Artisan Bread Baking, and Wine and Beverage Studies.",
+    "color": "green"
+  },
+  {
+    "title": "What are the admission requirements?",
+    "description": "Admission requirements vary by program but generally include a high school diploma or equivalent, a completed application form, and an entrance interview. Some programs may require prior culinary experience or coursework.",
+    "color": "green"
+  },
+  {
+    "title": "How long do the programs take to complete?",
+    "description": "Program lengths vary. Certificate programs can take 3-6 months, diploma programs typically last 1 year, and associate degree programs can take up to 2 years.Some courses may take 3 hours",
+    "color": "green"
+  },
+  {
+    "title": "Do you offer online courses?",
+    "description": "Yes, we offer a selection of online courses for those who cannot attend in person. These include foundational culinary skills, food safety, and nutrition.",
+    "color": "green"
+  },
+  {
+    "title": "Is financial aid available?",
+    "description": "Yes, we offer a variety of financial aid options including scholarships, grants, and payment plans. Please contact our financial aid office for more details.",
+    "color": "green"
+  },
+  {
+    "title": "Where is the academy located?",
+    "description": "Our main campus is located in Dhaka,Bangladesh. We also have satellite campuses in Chattogram & Berlin.",
+    "color": "green"
+  },
+  {
+    "title": "What facilities are available to students?",
+    "description": "Our campuses are equipped with state-of-the-art kitchens, baking labs, a student-run restaurant, a library, and computer labs. Students also have access to career services and counseling.",
+    "color": "green"
+  },
+  {
+    "title": "Is housing available for students?",
+    "description": "Yes, we offer on-campus housing and can assist with finding off-campus accommodations. Housing availability may vary, so we encourage students to apply early.",
+    "color": "green"
+  },
+  {
+    "title": "What are the class sizes like?",
+    "description": "We maintain small class sizes to ensure personalized instruction and hands-on learning. Typical class sizes range from 12-20 students. ",
+    "color": "green"
+  },
+  {
+    "title": "What career support do you offer?",
+    "description": "We offer extensive career services including resume writing workshops, interview preparation, job placement assistance, and networking events with industry professionals.",
+    "color": "green"
+  },
+  {
+    "title": "Do you have partnerships with local businesses for internships?",
+    "description": "Yes, we have established partnerships with numerous local restaurants, hotels, bakeries, and catering companies to provide our students with valuable internship opportunities.",
+    "color": "green"
+  },
+  {
+    "title": "Are there extracurricular activities for students?",
+    "description": "Yes, students can participate in various clubs and organizations such as the Culinary Club, Baking Society, Wine and Spirits Club, and community service initiatives.",
+    "color": "green"
+  },
+  {
+    "title": "Do you offer student support services?",
+    "description": "We offer a range of support services including academic advising, tutoring, counseling, and wellness programs to ensure student success and well-being.",
+    "color": "green"
+  },
+  {
+    "title": "How can I apply?",
+    "description": "You can apply online through our website or request a paper application by contacting our admissions office. Be sure to submit all required documents and fees by the application deadline.",
+    "color": "green"
+  },
+  {
+    "title": "Do you accept international students?",
+    "description": "Yes, we welcome international students. We offer assistance with visa applications and provide support to help international students acclimate to life in [Country].",
+    "color": "green"
+  },
+  {
+    "title": "Are classes taught in English?",
+    "description": "Yes, all classes are conducted in English. We require proof of English proficiency for non-native speakers, such as TOEFL or IELTS scores.",
+    "color": "green"
+  },
+  {
+    "title": "How can I get more information?",
+    "description": "For more information, please visit our website at https://gastronomixx.netlify.app or contact our admissions office at support@gastronomix.com.",
+    "color": "green"
+  }
+]

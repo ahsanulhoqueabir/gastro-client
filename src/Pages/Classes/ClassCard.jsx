@@ -8,9 +8,11 @@ import Swal from "sweetalert2";
 import { toast } from "react-toastify";
 import useUserData from "../../Hooks/useUserData";
 import useAxiosPublic from "../../Hooks/useAxiosPublic";
+import useAxiosSecure from "../../Hooks/useAxiosSecure";
 const ClassCard = ({ item }) => {
   const { user } = useContext(authContext);
-  const axiosPublic = useAxiosPublic();
+  // const axiosPublic = useAxiosPublic();
+  const [axiosSecure] = useAxiosSecure();
   const [info] = useUserData();
   let userRole;
   if (user) {
@@ -59,20 +61,8 @@ const ClassCard = ({ item }) => {
       }).then((result) => {
         if (result.isConfirmed) {
           const url = `/users/addSelectedClass?id=${info._id}&course=${item._id}`;
-          // fetch(url, {
-          //   method: "PUT",
-          //   headers: {
-          //     "Content-Type": "application/json",
-          //   },
-          //   body: JSON.stringify(item),
-          // })
-          //   .then((res) => res.json())
-          //   .then((data) => {
-          //     if (data) {
-          //       toast.success("Class Selected Successfully");
-          //     }
-          //   });
-          axiosPublic
+
+          axiosSecure
             .put(url)
             .then((res) => {
               toast.success("Class Selected Successfully");

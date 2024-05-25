@@ -25,6 +25,9 @@ import LoadingPage from "../Components/Loader/LoadingPage";
 import UpdateClass from "../Pages/Dashboard/Instructor/UpdateClass";
 import PrivacyPolicy from "../Pages/PrivacyPolicy";
 import TermsCondition from "../Pages/TermsCondition";
+import FAQ from "../Pages/FAQ";
+import Secondary from "../Layout/Secondary";
+import ABoutUs from "../Pages/ABoutUs";
 
 export const router = createBrowserRouter([
   {
@@ -126,6 +129,25 @@ export const router = createBrowserRouter([
           },
         ],
       },
+
+      {
+        path: "/loader",
+        element: <LoadingPage />,
+      },
+    ],
+  },
+  {
+    path: "/",
+    element: <Secondary />,
+    children: [
+      {
+        path: "faq",
+        element: <FAQ />,
+      },
+      {
+        path: "aboutus",
+        element: <ABoutUs />,
+      },
       {
         path: "policy",
         element: <PrivacyPolicy />,
@@ -134,12 +156,9 @@ export const router = createBrowserRouter([
         path: "terms",
         element: <TermsCondition />,
       },
-      {
-        path: "/loader",
-        element: <LoadingPage />,
-      },
     ],
   },
+
   {
     path: "error",
     element: <ErrorPage />,

@@ -4,6 +4,7 @@ import useUserData from "../../../Hooks/useUserData";
 import PageBanner from "../../../Components/PageBanner";
 import LoadingPage from "../../../Components/Loader/LoadingPage";
 import RouteTitle from "../../../utilities/RouteTitle";
+import EmptyItems from "../../../Components/Loader/EmptyItems";
 
 const PaymentHistory = () => {
   RouteTitle("Payment History");
@@ -27,6 +28,9 @@ const PaymentHistory = () => {
       <PageBanner>Payment History</PageBanner>
       <section>
         <div className=" py-10">
+          {!paymentHistory.length && (
+            <EmptyItems message={"No Payment found"} />
+          )}
           <div className="grid grid-cols-1 lg:grid-cols-2 w-fit mx-auto gap-5 text-black">
             {paymentHistory?.map((payment) => (
               <div

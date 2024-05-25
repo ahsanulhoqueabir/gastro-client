@@ -1,9 +1,11 @@
 import React, { useContext } from "react";
 import { authContext } from "../../ContextProvider/AuthProvider";
-import useAxiosPublic from "../../Hooks/useAxiosPublic";
 import useUserData from "../../Hooks/useUserData";
 import useUserRole from "../../Hooks/useUserRole";
 import { useLocation, useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
+import useAxiosSecure from "../../Hooks/useAxiosSecure";
+import { toast } from "react-toastify";
 
 const Card = ({ item }) => {
   const {
@@ -15,7 +17,7 @@ const Card = ({ item }) => {
     classDescription,
   } = item;
   const { user } = useContext(authContext);
-  const axiosPublic = useAxiosPublic();
+  const [axiosSecure] = useAxiosSecure();
   const [info] = useUserData();
   let userRole;
   if (user) {
@@ -64,7 +66,7 @@ const Card = ({ item }) => {
       }).then((result) => {
         if (result.isConfirmed) {
           const url = `/users/addSelectedClass?id=${info._id}&course=${item._id}`;
-          axiosPublic
+          axiosSecure
             .put(url)
             .then((res) => {
               toast.success("Class Selected Successfully");
@@ -76,9 +78,7 @@ const Card = ({ item }) => {
       });
     }
   };
-  const firstWord = () => {
-    return classDescription.split(" ")[0];
-  };
+
   return (
     <div className="pt-5">
       <div className="lg:flex gap-5">
@@ -122,7 +122,6 @@ const Card = ({ item }) => {
           Add to cart
         </button>
       </div>
-      
     </div>
   );
 };

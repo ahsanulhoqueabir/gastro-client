@@ -5,9 +5,11 @@ import { authContext } from "../../../../ContextProvider/AuthProvider";
 import Swal from "sweetalert2";
 import useUserData from "../../../../Hooks/useUserData";
 import Payment from "../../Payment/Payment";
+import useAxiosSecure from "../../../../Hooks/useAxiosSecure";
 
 const Card = ({ i }) => {
-  const [info, , refetch, ,] = useUserData();
+  const [info, , refetch] = useUserData();
+  const [axiosSecure] = useAxiosSecure();
   const handleDelete = () => {
     const url = `https://server-gastronomix.netlify.app/.netlify/functions/api/v1/users/RemoveClass?id=${info._id}&course=${i._id}`;
     Swal.fire({
@@ -19,7 +21,7 @@ const Card = ({ i }) => {
       confirmButtonText: "Yes",
     }).then((result) => {
       if (result.isConfirmed) {
-        fetch(url, { method: "DELETE" });
+        axiosSecure.delete(url);
         refetch();
         Swal.fire({
           title: "Removed!",
@@ -65,33 +67,3 @@ const Card = ({ i }) => {
 };
 
 export default Card;
-
-//  <div className="flex w-full lg:w-1/2 mx-auto gap-3 items-center pt-2">
-//    <div className="w-fit">
-//      <img src={i.classimage} alt="class" className="w-28 h-20 rounded-lg" />
-//    </div>
-//    <section className="flex justify-between">
-//      <div className="w-full">
-//        <div className=" flex-col justify-between">
-//          <h1 className="text-lg font-semibold">{i.classname}</h1>
-//          <h1>
-//            <small>by</small> <span>{i.classinstructor}</span>
-//          </h1>
-//        </div>
-//      </div>
-//  <div className=" lg:flex justify-between items-center w-20 lg:w-36">
-//    <div>
-//      <button onClick={handleDelete} className="  px-3 py-1 rounded-lg">
-//        <FaTrashAlt />
-//      </button>
-//    </div>
-//    <div>
-//      <Link>
-//        <button className="px-4 rounded-lg text-white py-0.5 bg-green-400">
-//          Pay
-//        </button>
-//      </Link>
-//    </div>
-//  </div>
-//    </section>
-//  </div>;

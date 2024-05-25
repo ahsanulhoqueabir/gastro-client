@@ -46,20 +46,26 @@ const Footer = () => {
             <div>
               <p className="font-medium">Additional Resources</p>
               <nav className="flex flex-col mt-4 space-y-2 text-sm text-gray-500">
-                <a className="hover:opacity-75">FAQ</a>
-                <a className="hover:opacity-75">Student Portal</a>
-                <a className="hover:opacity-75">Alumni Network</a>
-                <a className="hover:opacity-75">Career Services</a>
+                <Link to={"/faq"} className="hover:opacity-75">
+                  FAQ
+                </Link>
+                <Link className="hover:opacity-75">Student Portal</Link>
+                <Link className="hover:opacity-75">Alumni Network</Link>
+                <Link className="hover:opacity-75">Career Services</Link>
               </nav>
             </div>
             <div>
               <p className="font-medium">Helpful Links</p>
               <nav className="flex flex-col mt-4 space-y-2 text-sm text-gray-500">
-                <a className="hover:opacity-75">Home</a>
-                <a className="hover:opacity-75">About Us</a>
-                <a className="hover:opacity-75">Programs/Courses</a>
-                <a className="hover:opacity-75">Events</a>
-                <a className="hover:opacity-75">Blog/News</a>
+                <Link to={"/"} className="hover:opacity-75">
+                  Home
+                </Link>
+                <Link to={"/aboutus"} className="hover:opacity-75">
+                  About Us
+                </Link>
+                <Link className="hover:opacity-75">Programs/Courses</Link>
+                <Link className="hover:opacity-75">Events</Link>
+                <Link className="hover:opacity-75">Blog/News</Link>
               </nav>
             </div>
             <div>

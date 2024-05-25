@@ -4,10 +4,12 @@ import logo from "../assets/favicon.png";
 import { FaArrowRightToBracket } from "react-icons/fa6";
 import LoadingNavbar from "./LoadingNavbar";
 import useAuth from "../Hooks/useAuth";
+import useUserData from "../Hooks/useUserData";
 
 const Navbar = () => {
   const [theme, handleToggle] = useThemeControl();
   const { user, authLoading, logout } = useAuth();
+  const [info] = useUserData();
   const fields = (
     <>
       <li>
@@ -101,16 +103,18 @@ const Navbar = () => {
       </div>
       <div className="navbar-end pr-2">
         {user ? (
-          <div className="dropdown dropdown-end">
+          <div className="dropdown dropdown-end avatar online size-12 ">
             <div
-              className="rounded-full tooltip tooltip-left "
+              className="rounded-full tooltip tooltip-left  "
               data-tip={user.displayName}
             >
               <img
-                className="rounded-full size-12 object-cover"
+                className="rounded-full size-12 object-cover online"
                 alt={user.displayName}
                 src={
-                  user.photoURL
+                  info?.photo
+                    ? info.photo
+                    : user?.photoURL
                     ? user.photoURL
                     : "https://placehold.co/500x500/teal/orange.png?text=User+Image"
                 }

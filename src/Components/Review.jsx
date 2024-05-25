@@ -5,11 +5,13 @@ import Lottie from "lottie-react";
 import useUserData from "../Hooks/useUserData";
 import useAxiosPublic from "../Hooks/useAxiosPublic";
 import { toast } from "react-toastify";
+import useAxiosSecure from "../Hooks/useAxiosSecure";
 
 const Review = ({ instructor }) => {
   const [userRating, setUserRating] = useState(1);
   const [info] = useUserData();
-  const axiosPublic = useAxiosPublic();
+  // const axiosPublic = useAxiosPublic();
+  const [axiosSecure] = useAxiosSecure();
   const handleSubmit = (e) => {
     e.preventDefault();
     const form = e.target;
@@ -21,7 +23,7 @@ const Review = ({ instructor }) => {
       instructor: instructor,
       rating: parseInt(userRating),
     };
-    axiosPublic
+    axiosSecure
       .post("/reviews/add", data)
       .then((res) => {
         toast.success("Review submitted");
@@ -29,6 +31,7 @@ const Review = ({ instructor }) => {
       .catch((err) => {
         toast.error(err.message);
       });
+    form.reset();
   };
   return (
     <div>
@@ -122,7 +125,7 @@ const Review = ({ instructor }) => {
             </p>
             <div className="flex items-center justify-between">
               <button
-                disabled={info ? true : false}
+                disabled={info ? false : true}
                 className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
                 type="submit"
               >
